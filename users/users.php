@@ -244,7 +244,7 @@ $data_users=mysqli_fetch_array($req_users);
                     </div>
                     <!-- BEGIN: Users Layout -->
                     <?php
-                        $count=0; 
+                         
                         while ($row=mysqli_fetch_array($req_users))   { ?>
                         <div class="intro-y col-span-12 md:col-span-6">
                         <div class="box">
@@ -277,12 +277,7 @@ $data_users=mysqli_fetch_array($req_users);
                             </div>
                         </div>
                     </div> 
-                    <?php 
-                        $count++;
-                        if ($count >= 10) {
-                            break; 
-                        }
-                        } ?>
+                    <?php  } ?>
                     </div>
                     <!-- END: Users Layout -->
                     <!-- BEGIN: Pagination -->
