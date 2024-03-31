@@ -764,7 +764,7 @@ if(!isset($_SESSION["id_user"]) ||  (isset($_SESSION["id_user"]) && $_SESSION['i
                             </div>
                             <!-- END: New Products -->
                             <!-- BEGIN: New Authors -->
-                            <div class="intro-y box col-span-12">
+                            <!-- <div class="intro-y box col-span-12">
                                 <div class="flex items-center px-5 py-3 border-b border-slate-200/60 dark:border-darkmode-400">
                                     <h2 class="font-medium text-base mr-auto">
                                         New Authors
@@ -949,7 +949,7 @@ if(!isset($_SESSION["id_user"]) ||  (isset($_SESSION["id_user"]) && $_SESSION['i
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- END: New Authors -->
                         </div>
                     </div>
