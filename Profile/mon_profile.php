@@ -1,5 +1,10 @@
 <?php 
 SESSION_START();
+
+if(!isset($_SESSION["id_user"]) ||  (isset($_SESSION["id_user"]) && $_SESSION['id_user'] =='')) {
+    header('location: ../login.php');
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -41,7 +46,7 @@ SESSION_START();
                     <!-- BEGIN: Breadcrumb -->
                     <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Profile</a></li>
+                            <li class="breadcrumb-item"><a href="./mon_profile.php">Profile</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Mon Profile</li>
                         </ol>
                     </nav>

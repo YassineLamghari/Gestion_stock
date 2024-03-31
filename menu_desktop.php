@@ -37,15 +37,16 @@
                             </li>
                         </ul>
                     <li class="side-nav__devider my-6"></li>
-                    <li>
-                        <a href="../users/users.php" class="side-menu<?php if($page_menu == 'users') {?> side-menu--active <?php } ?> ">
-                            <div class="side-menu__icon"><i data-lucide="users"></i> </div>
-                            <div class="side-menu__title"> 
-                                Users
-                            </div>
-                        </a>
-                        
-                    </li>
+                    <?php if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin') { ?>
+                        <li>
+                            <a href="../users/users.php" class="side-menu<?php if($page_menu == 'users') {?> side-menu--active <?php } ?>">
+                                <div class="side-menu__icon"> <i data-lucide="users"></i> </div>
+                                <div class="side-menu__title">
+                                    Users
+                                </div>
+                            </a>
+                        </li>
+                    <?php } ?>
                     <li>
                         <a href="javascript:;" class="side-menu <?php if($page_menu == 'mon_profile' || $page_menu == 'change_password') {?> side-menu--active <?php } ?>">
                             <div class="side-menu__icon"> <i data-lucide="trello"></i> </div>

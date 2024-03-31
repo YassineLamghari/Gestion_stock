@@ -1,6 +1,13 @@
 <?php
 SESSION_START();
 
+if(!isset($_SESSION["id_user"]) ||  (isset($_SESSION["id_user"]) && $_SESSION['id_user'] =='')) {
+    header('location: ../login.php');
+}
+if($_SESSION['role'] != 'admin') {
+    header('location: ../error_page.php');
+    exit; 
+}
 include("../securite/cnx.php");
 ?>
 
@@ -233,6 +240,8 @@ $data_users=mysqli_fetch_array($req_users);
                             $req_count_user=mysqli_query($cnx,"SELECT COUNT(*) AS user_count FROM users");
                             $count_result = mysqli_fetch_assoc($req_count_user);
                             $user_count = $count_result['user_count'];
+
+                            $_SESSION['user_count'] = $user_count;
                         ?>
                         <div class="hidden md:block mx-auto text-slate-500">Showing 1 to 10 of <?php echo $user_count; ?> entries</div>
                         <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">

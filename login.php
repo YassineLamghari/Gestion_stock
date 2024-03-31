@@ -17,6 +17,7 @@ if(isset($_POST["login"])){
         $_SESSION['id_user'] = $data_log['id'];
         $_SESSION['nom_user'] = $data_log['nom'];
         $_SESSION['email_user'] = $data_log['email'];
+        $_SESSION['role']= $data_log['role'];
 
         header("location: ./dashboard/index.php");
     }else{

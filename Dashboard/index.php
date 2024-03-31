@@ -2,8 +2,9 @@
 SESSION_START();
 
 if(!isset($_SESSION["id_user"]) ||  (isset($_SESSION["id_user"]) && $_SESSION['id_user'] =='')) {
-    header('location: login.php');
+    header('location: ../login.php');
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +46,7 @@ if(!isset($_SESSION["id_user"]) ||  (isset($_SESSION["id_user"]) && $_SESSION['i
                     <!-- BEGIN: Breadcrumb -->
                     <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="index.php">Dashboard</a></li>
                         </ol>
                     </nav>
                     <!-- END: Breadcrumb -->

@@ -6,7 +6,7 @@
                             <ul class="dropdown-content bg-primary text-white">
                                 <li class="p-2">
                                     <div class="font-medium"><?php echo $_SESSION['nom_user'] ?></div>
-                                    <div class="text-xs text-white/70 mt-0.5 dark:text-slate-500">Software Engineer</div>
+                                    <div class="text-xs text-white/70 mt-0.5 dark:text-slate-500"><?php echo ucfirst($_SESSION['role']) ?></div>
                                 </li>
                                 <li>
                                     <hr class="dropdown-divider border-white/[0.08]">

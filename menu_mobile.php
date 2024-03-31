@@ -34,12 +34,14 @@
                             </li>
                         </ul>
                     <li class="menu__devider my-6"></li>
-                    <li>
-                        <a href="../users/users.php" class="menu <?php if($page_menu =='users') { ?> menu--active <?php } ?>">
-                            <div class="menu__icon"> <i data-lucide="users"></i> </div>
-                            <div class="menu__title">Users</div>
-                        </a>
-                    </li>
+                    <?php if($_SESSION['role'] == 'admin') { ?>
+                        <li>
+                            <a href="../users/users.php" class="menu <?php if($page_menu =='users') { ?> menu--active <?php } ?>">
+                                <div class="menu__icon"> <i data-lucide="users"></i> </div>
+                                <div class="menu__title">Users</div>
+                            </a>
+                        </li>
+                    <?php } ?>
                     <li>
                         <a href="javascript:;" class="menu <?php if($page_menu =='mon_profile' || $page_menu== 'change_password') { ?> menu--active <?php } ?>">
                             <div class="menu__icon"> <i data-lucide="trello"></i> </div>
