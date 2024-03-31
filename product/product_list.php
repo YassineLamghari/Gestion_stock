@@ -274,7 +274,7 @@ if(isset($_GET['supprimer_product'])){
                                         </div>
                                     </td>
                                     <td>
-                                        <a href="" class="font-medium whitespace-nowrap"><?php echo $row_product['libelle'] ?></a> 
+                                        <a href="" class="font-medium whitespace-nowrap"><?php echo ucfirst($row_product['libelle']) ?></a> 
                                         <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">Sport &amp; Outdoor</div>
                                     </td>
                                     <td class="text-center"><?php echo $row_product['Qte'] ?></td>
@@ -291,7 +291,7 @@ if(isset($_GET['supprimer_product'])){
                                     <td class="table-report__action w-56">
                                         <div class="flex justify-center items-center">
                                             <a class="flex items-center mr-3" href="./modifier_product.php?modifier_product=<?php echo $row_product['id'] ?>"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                                            <a class="flex items-center text-danger" href="./product_list.php?supprimer_product=<?php echo $row_product['id'] ?>" onclick="confirm(javascript:;);" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
+                                            <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
                                         </div>
                                     </td>
                                 </tr>
@@ -341,12 +341,12 @@ if(isset($_GET['supprimer_product'])){
                                     <i data-lucide="x-circle" class="w-16 h-16 text-danger mx-auto mt-3"></i> 
                                     <div class="text-3xl mt-5">Are you sure?</div>
                                     <div class="text-slate-500 mt-2">
-                                        Do you really want to delete these product? 
+                                        Do you really want to delete these product : <?php echo $data_product['libelle'] ?> ? 
                                     </div>
                                 </div>
                                 <div class="px-5 pb-8 text-center">
                                     <button type="button" data-tw-dismiss="modal" class="btn btn-outline-secondary w-24 mr-1">Cancel</button>
-                                    <button type="button" class="btn btn-danger w-24">Delete</button>
+                                    <a href="./product_list.php?supprimer_product=<?php echo $data_product['id'] ?>" class="btn btn-danger w-24">Delete</a>
                                 </div>
                             </div>
                         </div>

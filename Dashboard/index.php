@@ -556,7 +556,7 @@ include("../securite/cnx.php");
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <a href="" class="font-medium whitespace-nowrap"><?php echo $row_product['libelle'] ?></a> 
+                                                    <a href="" class="font-medium whitespace-nowrap"><?php echo ucfirst($row_product['libelle']) ?></a> 
                                                     <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">Sport &amp; Outdoor</div>
                                                 </td>
                                                 <td class="text-center"><?php echo $row_product['Qte'] ?></td>
