@@ -1,14 +1,16 @@
 <?php
 SESSION_START();
 
-if(!isset($_SESSION["id_user"]) ||  (isset($_SESSION["id_user"]) && $_SESSION['id_user'] =='')) {
-    header('location: ../login.php');
-}
-if($_SESSION['role'] != 'admin') {
-    header('location: ../error_page.php');
-    exit; 
-}
 include("../securite/cnx.php");
+?>
+<?php
+if(isset($_GET['supprimer_product'])){
+    $id_supprimer =$_GET['supprimer_product'];
+    $supp_product="DELETE FROM product WHERE id= '$id_supprimer'";
+    if(mysqli_query($cnx,"$supp_product")){
+        header("location: ./product_list.php?delete");
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en" class="light">
@@ -20,7 +22,7 @@ include("../securite/cnx.php");
         <meta name="description" content="Midone admin is super flexible, powerful, clean & modern responsive tailwind admin template with unlimited possibilities.">
         <meta name="keywords" content="admin template, Midone Admin Template, dashboard template, flat admin template, responsive admin template, web app">
         <meta name="author" content="LEFT4CODE">
-        <title>Users</title>
+        <title>Product List</title>
         <!-- BEGIN: CSS Assets-->
         <link rel="stylesheet" href="../dist/css/app.css" />
         <!-- END: CSS Assets-->
@@ -30,15 +32,14 @@ include("../securite/cnx.php");
         <!-- BEGIN: Mobile Menu -->
         <div class="mobile-menu md:hidden">
             <?php 
-                $page_menu="users";
+                $page_menu="product_list";
                 include("../menu_mobile.php");
             ?>
-        </div>
-        <!-- END: Mobile Menu -->
+            </div>
         <div class="flex mt-[4.7rem] md:mt-0">
             <!-- BEGIN: Side Menu -->
             <?php 
-                $page_menu="users";
+                $page_menu="product_list";
                 include("../menu_desktop.php");
             ?>
             <!-- END: Side Menu -->
@@ -49,7 +50,8 @@ include("../securite/cnx.php");
                     <!-- BEGIN: Breadcrumb -->
                     <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="">Users</a></li>
+                            <li class="breadcrumb-item"><a href="side-menu-light-product-list.html">Product</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Product List</li>
                         </ol>
                     </nav>
                     <!-- END: Breadcrumb -->
@@ -81,61 +83,61 @@ include("../securite/cnx.php");
                                 <div class="mb-5">
                                     <a href="" class="flex items-center mt-2">
                                         <div class="w-8 h-8 image-fit">
-                                            <img alt="Midone - HTML Admin Template" class="rounded-full" src="../dist/images/profile-6.jpg">
-                                        </div>
-                                        <div class="ml-3">Robert De Niro</div>
-                                        <div class="ml-auto w-48 truncate text-slate-500 text-xs text-right">robertdeniro@left4code.com</div>
-                                    </a>
-                                    <a href="" class="flex items-center mt-2">
-                                        <div class="w-8 h-8 image-fit">
-                                            <img alt="Midone - HTML Admin Template" class="rounded-full" src="../dist/images/profile-14.jpg">
+                                            <img alt="Midone - HTML Admin Template" class="rounded-full" src="../dist/images/profile-13.jpg">
                                         </div>
                                         <div class="ml-3">Kevin Spacey</div>
                                         <div class="ml-auto w-48 truncate text-slate-500 text-xs text-right">kevinspacey@left4code.com</div>
                                     </a>
                                     <a href="" class="flex items-center mt-2">
                                         <div class="w-8 h-8 image-fit">
-                                            <img alt="Midone - HTML Admin Template" class="rounded-full" src="../dist/images/profile-1.jpg">
+                                            <img alt="Midone - HTML Admin Template" class="rounded-full" src="../dist/images/profile-11.jpg">
                                         </div>
-                                        <div class="ml-3">Kevin Spacey</div>
-                                        <div class="ml-auto w-48 truncate text-slate-500 text-xs text-right">kevinspacey@left4code.com</div>
+                                        <div class="ml-3">Denzel Washington</div>
+                                        <div class="ml-auto w-48 truncate text-slate-500 text-xs text-right">denzelwashington@left4code.com</div>
                                     </a>
                                     <a href="" class="flex items-center mt-2">
                                         <div class="w-8 h-8 image-fit">
-                                            <img alt="Midone - HTML Admin Template" class="rounded-full" src="../dist/images/profile-9.jpg">
+                                            <img alt="Midone - HTML Admin Template" class="rounded-full" src="../dist/images/profile-15.jpg">
                                         </div>
-                                        <div class="ml-3">Johnny Depp</div>
-                                        <div class="ml-auto w-48 truncate text-slate-500 text-xs text-right">johnnydepp@left4code.com</div>
+                                        <div class="ml-3">Christian Bale</div>
+                                        <div class="ml-auto w-48 truncate text-slate-500 text-xs text-right">christianbale@left4code.com</div>
+                                    </a>
+                                    <a href="" class="flex items-center mt-2">
+                                        <div class="w-8 h-8 image-fit">
+                                            <img alt="Midone - HTML Admin Template" class="rounded-full" src="../dist/images/profile-5.jpg">
+                                        </div>
+                                        <div class="ml-3">Tom Cruise</div>
+                                        <div class="ml-auto w-48 truncate text-slate-500 text-xs text-right">tomcruise@left4code.com</div>
                                     </a>
                                 </div>
                                 <div class="search-result__content__title">Products</div>
                                 <a href="" class="flex items-center mt-2">
                                     <div class="w-8 h-8 image-fit">
-                                        <img alt="Midone - HTML Admin Template" class="rounded-full" src="../dist/images/preview-9.jpg">
+                                        <img alt="Midone - HTML Admin Template" class="rounded-full" src="../dist/images/preview-13.jpg">
+                                    </div>
+                                    <div class="ml-3">Apple MacBook Pro 13</div>
+                                    <div class="ml-auto w-48 truncate text-slate-500 text-xs text-right">PC &amp; Laptop</div>
+                                </a>
+                                <a href="" class="flex items-center mt-2">
+                                    <div class="w-8 h-8 image-fit">
+                                        <img alt="Midone - HTML Admin Template" class="rounded-full" src="../dist/images/preview-1.jpg">
                                     </div>
                                     <div class="ml-3">Sony A7 III</div>
                                     <div class="ml-auto w-48 truncate text-slate-500 text-xs text-right">Photography</div>
                                 </a>
                                 <a href="" class="flex items-center mt-2">
                                     <div class="w-8 h-8 image-fit">
-                                        <img alt="Midone - HTML Admin Template" class="rounded-full" src="../dist/images/preview-5.jpg">
+                                        <img alt="Midone - HTML Admin Template" class="rounded-full" src="../dist/images/preview-1.jpg">
                                     </div>
-                                    <div class="ml-3">Nike Tanjun</div>
+                                    <div class="ml-3">Nike Air Max 270</div>
                                     <div class="ml-auto w-48 truncate text-slate-500 text-xs text-right">Sport &amp; Outdoor</div>
                                 </a>
                                 <a href="" class="flex items-center mt-2">
                                     <div class="w-8 h-8 image-fit">
-                                        <img alt="Midone - HTML Admin Template" class="rounded-full" src="../dist/images/preview-12.jpg">
+                                        <img alt="Midone - HTML Admin Template" class="rounded-full" src="../dist/images/preview-8.jpg">
                                     </div>
-                                    <div class="ml-3">Samsung Q90 QLED TV</div>
-                                    <div class="ml-auto w-48 truncate text-slate-500 text-xs text-right">Electronic</div>
-                                </a>
-                                <a href="" class="flex items-center mt-2">
-                                    <div class="w-8 h-8 image-fit">
-                                        <img alt="Midone - HTML Admin Template" class="rounded-full" src="../dist/images/preview-2.jpg">
-                                    </div>
-                                    <div class="ml-3">Samsung Galaxy S20 Ultra</div>
-                                    <div class="ml-auto w-48 truncate text-slate-500 text-xs text-right">Smartphone &amp; Tablet</div>
+                                    <div class="ml-3">Sony A7 III</div>
+                                    <div class="ml-auto w-48 truncate text-slate-500 text-xs text-right">Photography</div>
                                 </a>
                             </div>
                         </div>
@@ -149,13 +151,52 @@ include("../securite/cnx.php");
                                 <div class="notification-content__title">Notifications</div>
                                 <div class="cursor-pointer relative flex items-center ">
                                     <div class="w-12 h-12 flex-none image-fit mr-1">
-                                        <img alt="Midone - HTML Admin Template" class="rounded-full" src="../dist/images/profile-6.jpg">
+                                        <img alt="Midone - HTML Admin Template" class="rounded-full" src="../dist/images/profile-13.jpg">
                                         <div class="w-3 h-3 bg-success absolute right-0 bottom-0 rounded-full border-2 border-white dark:border-darkmode-600"></div>
                                     </div>
                                     <div class="ml-2 overflow-hidden">
                                         <div class="flex items-center">
-                                            <a href="javascript:;" class="font-medium truncate mr-5">Robert De Niro</a> 
-                                            <div class="text-xs text-slate-400 ml-auto whitespace-nowrap">03:20 PM</div>
+                                            <a href="javascript:;" class="font-medium truncate mr-5">Kevin Spacey</a> 
+                                            <div class="text-xs text-slate-400 ml-auto whitespace-nowrap">01:10 PM</div>
+                                        </div>
+                                        <div class="w-full truncate text-slate-500 mt-0.5">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 20</div>
+                                    </div>
+                                </div>
+                                <div class="cursor-pointer relative flex items-center mt-5">
+                                    <div class="w-12 h-12 flex-none image-fit mr-1">
+                                        <img alt="Midone - HTML Admin Template" class="rounded-full" src="../dist/images/profile-11.jpg">
+                                        <div class="w-3 h-3 bg-success absolute right-0 bottom-0 rounded-full border-2 border-white dark:border-darkmode-600"></div>
+                                    </div>
+                                    <div class="ml-2 overflow-hidden">
+                                        <div class="flex items-center">
+                                            <a href="javascript:;" class="font-medium truncate mr-5">Denzel Washington</a> 
+                                            <div class="text-xs text-slate-400 ml-auto whitespace-nowrap">05:09 AM</div>
+                                        </div>
+                                        <div class="w-full truncate text-slate-500 mt-0.5">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 20</div>
+                                    </div>
+                                </div>
+                                <div class="cursor-pointer relative flex items-center mt-5">
+                                    <div class="w-12 h-12 flex-none image-fit mr-1">
+                                        <img alt="Midone - HTML Admin Template" class="rounded-full" src="../dist/images/profile-15.jpg">
+                                        <div class="w-3 h-3 bg-success absolute right-0 bottom-0 rounded-full border-2 border-white dark:border-darkmode-600"></div>
+                                    </div>
+                                    <div class="ml-2 overflow-hidden">
+                                        <div class="flex items-center">
+                                            <a href="javascript:;" class="font-medium truncate mr-5">Christian Bale</a> 
+                                            <div class="text-xs text-slate-400 ml-auto whitespace-nowrap">01:10 PM</div>
+                                        </div>
+                                        <div class="w-full truncate text-slate-500 mt-0.5">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomi</div>
+                                    </div>
+                                </div>
+                                <div class="cursor-pointer relative flex items-center mt-5">
+                                    <div class="w-12 h-12 flex-none image-fit mr-1">
+                                        <img alt="Midone - HTML Admin Template" class="rounded-full" src="../dist/images/profile-5.jpg">
+                                        <div class="w-3 h-3 bg-success absolute right-0 bottom-0 rounded-full border-2 border-white dark:border-darkmode-600"></div>
+                                    </div>
+                                    <div class="ml-2 overflow-hidden">
+                                        <div class="flex items-center">
+                                            <a href="javascript:;" class="font-medium truncate mr-5">Tom Cruise</a> 
+                                            <div class="text-xs text-slate-400 ml-auto whitespace-nowrap">05:09 AM</div>
                                         </div>
                                         <div class="w-full truncate text-slate-500 mt-0.5">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 20</div>
                                     </div>
@@ -167,49 +208,10 @@ include("../securite/cnx.php");
                                     </div>
                                     <div class="ml-2 overflow-hidden">
                                         <div class="flex items-center">
-                                            <a href="javascript:;" class="font-medium truncate mr-5">Kevin Spacey</a> 
+                                            <a href="javascript:;" class="font-medium truncate mr-5">Al Pacino</a> 
                                             <div class="text-xs text-slate-400 ml-auto whitespace-nowrap">01:10 PM</div>
                                         </div>
-                                        <div class="w-full truncate text-slate-500 mt-0.5">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 20</div>
-                                    </div>
-                                </div>
-                                <div class="cursor-pointer relative flex items-center mt-5">
-                                    <div class="w-12 h-12 flex-none image-fit mr-1">
-                                        <img alt="Midone - HTML Admin Template" class="rounded-full" src="../dist/images/profile-1.jpg">
-                                        <div class="w-3 h-3 bg-success absolute right-0 bottom-0 rounded-full border-2 border-white dark:border-darkmode-600"></div>
-                                    </div>
-                                    <div class="ml-2 overflow-hidden">
-                                        <div class="flex items-center">
-                                            <a href="javascript:;" class="font-medium truncate mr-5">Kevin Spacey</a> 
-                                            <div class="text-xs text-slate-400 ml-auto whitespace-nowrap">01:10 PM</div>
-                                        </div>
-                                        <div class="w-full truncate text-slate-500 mt-0.5">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 20</div>
-                                    </div>
-                                </div>
-                                <div class="cursor-pointer relative flex items-center mt-5">
-                                    <div class="w-12 h-12 flex-none image-fit mr-1">
-                                        <img alt="Midone - HTML Admin Template" class="rounded-full" src="../dist/images/profile-9.jpg">
-                                        <div class="w-3 h-3 bg-success absolute right-0 bottom-0 rounded-full border-2 border-white dark:border-darkmode-600"></div>
-                                    </div>
-                                    <div class="ml-2 overflow-hidden">
-                                        <div class="flex items-center">
-                                            <a href="javascript:;" class="font-medium truncate mr-5">Johnny Depp</a> 
-                                            <div class="text-xs text-slate-400 ml-auto whitespace-nowrap">01:10 PM</div>
-                                        </div>
-                                        <div class="w-full truncate text-slate-500 mt-0.5">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem </div>
-                                    </div>
-                                </div>
-                                <div class="cursor-pointer relative flex items-center mt-5">
-                                    <div class="w-12 h-12 flex-none image-fit mr-1">
-                                        <img alt="Midone - HTML Admin Template" class="rounded-full" src="../dist/images/profile-6.jpg">
-                                        <div class="w-3 h-3 bg-success absolute right-0 bottom-0 rounded-full border-2 border-white dark:border-darkmode-600"></div>
-                                    </div>
-                                    <div class="ml-2 overflow-hidden">
-                                        <div class="flex items-center">
-                                            <a href="javascript:;" class="font-medium truncate mr-5">John Travolta</a> 
-                                            <div class="text-xs text-slate-400 ml-auto whitespace-nowrap">01:10 PM</div>
-                                        </div>
-                                        <div class="w-full truncate text-slate-500 mt-0.5">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomi</div>
+                                        <div class="w-full truncate text-slate-500 mt-0.5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#039;s standard dummy text ever since the 1500</div>
                                     </div>
                                 </div>
                             </div>
@@ -224,19 +226,17 @@ include("../securite/cnx.php");
                 </div>
                 <!-- END: Top Bar -->
                 <h2 class="intro-y text-lg font-medium mt-10">
-                    All Users 
+                    Product List
                 </h2>
                 <div class="grid grid-cols-12 gap-6 mt-5">
                     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
-                        <button class="btn btn-primary shadow-md mr-2">Add New User</button>
+                        <a href="./add_product.php"><button class="btn btn-primary shadow-md mr-2">Add New Product</button></a>
                         <?php 
-                            $req_count_user=mysqli_query($cnx,"SELECT COUNT(*) AS user_count FROM users");
-                            $count_result = mysqli_fetch_assoc($req_count_user);
-                            $user_count = $count_result['user_count'];
-
-                            $_SESSION['user_count'] = $user_count;
+                            $req_count_product=mysqli_query($cnx,"SELECT COUNT(*) AS product_count FROM product");
+                            $count_result = mysqli_fetch_assoc($req_count_product);
+                            $product_count = $count_result['product_count'];
                         ?>
-                        <div class="hidden md:block mx-auto text-slate-500">Showing 1 to 10 of <?php echo $user_count; ?> entries</div>
+                        <div class="hidden md:block mx-auto text-slate-500">Showing 1 to 10 of <?php echo $product_count ?> entries</div>
                         <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
                             <div class="w-56 relative text-slate-500">
                                 <input type="text" class="form-control w-56 box pr-10" placeholder="Search...">
@@ -244,49 +244,64 @@ include("../securite/cnx.php");
                             </div>
                         </div>
                     </div>
-                    <!-- BEGIN: Users Layout -->
-                    <?php
-                         $req_users="SELECT * FROM users";
-                         $req_users=mysqli_query($cnx, $req_users);
-                         $data_users=mysqli_fetch_array($req_users);
-                        
-                        while ($row=mysqli_fetch_array($req_users))   { ?>
-                        <div class="intro-y col-span-12 md:col-span-6">
-                        <div class="box">
-                            <div class="flex flex-col lg:flex-row items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400 m">
-                                <div class="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
-                                    <img alt="Midone - HTML Admin Template" class="rounded-full" src="../dist/images/profile-1.jpg">
-                                </div>
-                                <div class="lg:ml-2 lg:mr-auto text-center lg:text-left mt-3 lg:mt-0">
-                                    <a href="" class="font-medium"><?php echo $row['nom'] ?></a> 
-                                    <div class="text-slate-500 text-xs mt-0.5"><?php echo ucfirst($row['role']) ?></div>
-                                </div>
-                                <div class="flex -ml-2 lg:ml-0 lg:justify-end mt-3 lg:mt-0">
-                                    <a href="" class="w-8 h-8 rounded-full flex items-center justify-center border dark:border-darkmode-400 ml-2 text-slate-400 zoom-in tooltip" title="Facebook"> <i class="w-3 h-3 fill-current" data-lucide="facebook"></i> </a>
-                                    <a href="" class="w-8 h-8 rounded-full flex items-center justify-center border dark:border-darkmode-400 ml-2 text-slate-400 zoom-in tooltip" title="Twitter"> <i class="w-3 h-3 fill-current" data-lucide="twitter"></i> </a>
-                                    <a href="" class="w-8 h-8 rounded-full flex items-center justify-center border dark:border-darkmode-400 ml-2 text-slate-400 zoom-in tooltip" title="Linked In"> <i class="w-3 h-3 fill-current" data-lucide="linkedin"></i> </a>
-                                </div>
-                            </div>
-                            <div class="flex flex-wrap lg:flex-nowrap items-center justify-center p-5">
-                                <div class="w-full lg:w-1/2 mb-4 lg:mb-0 mr-auto">
-                                    <div class="flex text-slate-500 text-xs">
-                                        <div class="mr-auto">Progress</div>
-                                        <div>20%</div>
-                                    </div>
-                                    <div class="progress h-1 mt-2">
-                                        <div class="progress-bar w-1/4 bg-primary" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                                <button class="btn btn-primary py-1 px-2 mr-2">Message</button>
-                                <button class="btn btn-outline-secondary py-1 px-2">Profile</button>
-                            </div>
-                        </div>
-                    </div> 
-                    <?php  } ?>
+                    <!-- BEGIN: Data List -->
+                    <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
+                        <table class="table table-report -mt-2">
+                            <thead>
+                                <tr>
+                                    <th class="whitespace-nowrap">#REFERENCE</th>
+                                    <th class="whitespace-nowrap">PRODUCT NAME</th>
+                                    <th class="text-center whitespace-nowrap">STOCK</th>
+                                    <th class="text-center whitespace-nowrap">PRICE</th>
+                                    <th class="text-center whitespace-nowrap">STATUS</th>
+                                    <th class="text-center whitespace-nowrap">ACTIONS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php 
+                                    $req_product="SELECT * FROM product";
+                                    $res_product=mysqli_query($cnx,$req_product);
+                                    $data_product=mysqli_fetch_array($res_product);  
+                                    
+                                    while($row_product=mysqli_fetch_array($res_product)){ 
+                                ?>
+                                <tr class="intro-x">
+                                    <td class="w-40">
+                                        <div class="flex">
+                                            <div class="text-center mx-auto font-medium">
+                                                <?php echo $row_product['id']; ?>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a href="" class="font-medium whitespace-nowrap"><?php echo $row_product['libelle'] ?></a> 
+                                        <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">Sport &amp; Outdoor</div>
+                                    </td>
+                                    <td class="text-center"><?php echo $row_product['Qte'] ?></td>
+                                    <td class="text-center"><?php echo $row_product['Prix'] ?></td>
+                                    <td class="w-40">
+                                        <?php 
+                                            if ($row_product['Qte'] <= 10) {
+                                                echo '<div class="flex items-center justify-center text-danger"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> Out Stock </div>';
+                                            } else {
+                                                echo '<div class="flex items-center justify-center text-success"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> In Stock </div>';
+                                            }
+                                            ?>
+                                    </td>
+                                    <td class="table-report__action w-56">
+                                        <div class="flex justify-center items-center">
+                                            <a class="flex items-center mr-3" href="./modifier_product.php?modifier_product=<?php echo $row_product['id'] ?>"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
+                                            <a class="flex items-center text-danger" href="./product_list.php?supprimer_product=<?php echo $row_product['id'] ?>" onclick="confirm(javascript:;);" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
                     </div>
-                    <!-- END: Users Layout -->
+                    <!-- END: Data List -->
                     <!-- BEGIN: Pagination -->
-                    <div class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center mt-4">
+                    <div class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center">
                         <nav class="w-full sm:w-auto sm:mr-auto">
                             <ul class="pagination">
                                 <li class="page-item">
@@ -297,7 +312,7 @@ include("../securite/cnx.php");
                                 </li>
                                 <li class="page-item"> <a class="page-link" href="#">...</a> </li>
                                 <li class="page-item active"> <a class="page-link" href="#">1</a> </li>
-                                <li class="page-item"> <a class="page-link" href="#">2</a> </li>
+                                <li class="page-item "> <a class="page-link" href="#">2</a> </li>
                                 <li class="page-item"> <a class="page-link" href="#">3</a> </li>
                                 <li class="page-item"> <a class="page-link" href="#">...</a> </li>
                                 <li class="page-item">
@@ -317,9 +332,31 @@ include("../securite/cnx.php");
                     </div>
                     <!-- END: Pagination -->
                 </div>
+                <!-- BEGIN: Delete Confirmation Modal -->
+                <div id="delete-confirmation-modal" class="modal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body p-0">
+                                <div class="p-5 text-center">
+                                    <i data-lucide="x-circle" class="w-16 h-16 text-danger mx-auto mt-3"></i> 
+                                    <div class="text-3xl mt-5">Are you sure?</div>
+                                    <div class="text-slate-500 mt-2">
+                                        Do you really want to delete these product? 
+                                    </div>
+                                </div>
+                                <div class="px-5 pb-8 text-center">
+                                    <button type="button" data-tw-dismiss="modal" class="btn btn-outline-secondary w-24 mr-1">Cancel</button>
+                                    <button type="button" class="btn btn-danger w-24">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END: Delete Confirmation Modal -->
             </div>
             <!-- END: Content -->
-        </div>        
+        </div>
+        
         <!-- BEGIN: JS Assets-->
         <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=["your-google-map-api"]&libraries=places"></script>

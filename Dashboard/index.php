@@ -4,7 +4,7 @@ SESSION_START();
 if(!isset($_SESSION["id_user"]) ||  (isset($_SESSION["id_user"]) && $_SESSION['id_user'] =='')) {
     header('location: ../login.php');
 }
-
+include("../securite/cnx.php");
 ?>
 
 <!DOCTYPE html>
@@ -51,7 +51,7 @@ if(!isset($_SESSION["id_user"]) ||  (isset($_SESSION["id_user"]) && $_SESSION['i
                     </nav>
                     <!-- END: Breadcrumb -->
                     <!-- BEGIN: Search -->
-                    <div class="intro-x relative mr-3 sm:mr-6">
+                    <!-- <div class="intro-x relative mr-3 sm:mr-6">
                         <div class="search hidden sm:block">
                             <input type="text" class="search__input form-control border-transparent" placeholder="Search...">
                             <i data-lucide="search" class="search__icon dark:text-slate-500"></i> 
@@ -65,88 +65,66 @@ if(!isset($_SESSION["id_user"]) ||  (isset($_SESSION["id_user"]) && $_SESSION['i
                                         <div class="w-8 h-8 bg-success/20 dark:bg-success/10 text-success flex items-center justify-center rounded-full"> <i class="w-4 h-4" data-lucide="inbox"></i> </div>
                                         <div class="ml-3">Mail Settings</div>
                                     </a>
-                                    <a href="" class="flex items-center mt-2">
-                                        <div class="w-8 h-8 bg-pending/10 text-pending flex items-center justify-center rounded-full"> <i class="w-4 h-4" data-lucide="users"></i> </div>
-                                        <div class="ml-3">Users & Permissions</div>
-                                    </a>
-                                    <a href="" class="flex items-center mt-2">
-                                        <div class="w-8 h-8 bg-primary/10 dark:bg-primary/20 text-primary/80 flex items-center justify-center rounded-full"> <i class="w-4 h-4" data-lucide="credit-card"></i> </div>
-                                        <div class="ml-3">Transactions Report</div>
-                                    </a>
+                                    <?php if(isset($_SESSION["role"]) && $_SESSION["role"] == "admin") { ?>
+                                        <a href="../users/users.php" class="flex items-center mt-2">
+                                            <div class="w-8 h-8 bg-pending/10 text-pending flex items-center justify-center rounded-full"> <i class="w-4 h-4" data-lucide="users"></i> </div>
+                                            <div class="ml-3">Users & Permissions</div>
+                                        </a>
+                                    <?php }?>
                                 </div>
+                                <?php if(isset($_SESSION["role"]) && $_SESSION["role"] == "admin") { ?>
                                 <div class="search-result__content__title">Users</div>
-                                <div class="mb-5">
-                                    <a href="" class="flex items-center mt-2">
-                                        <div class="w-8 h-8 image-fit">
-                                            <img alt="Midone - HTML Admin Template" class="rounded-full" src="dist/images/profile-7.jpg">
-                                        </div>
-                                        <div class="ml-3">Kevin Spacey</div>
-                                        <div class="ml-auto w-48 truncate text-slate-500 text-xs text-right">kevinspacey@left4code.com</div>
-                                    </a>
-                                    <a href="" class="flex items-center mt-2">
-                                        <div class="w-8 h-8 image-fit">
-                                            <img alt="Midone - HTML Admin Template" class="rounded-full" src="dist/images/profile-2.jpg">
-                                        </div>
-                                        <div class="ml-3">Johnny Depp</div>
-                                        <div class="ml-auto w-48 truncate text-slate-500 text-xs text-right">johnnydepp@left4code.com</div>
-                                    </a>
-                                    <a href="" class="flex items-center mt-2">
-                                        <div class="w-8 h-8 image-fit">
-                                            <img alt="Midone - HTML Admin Template" class="rounded-full" src="dist/images/profile-5.jpg">
-                                        </div>
-                                        <div class="ml-3">Johnny Depp</div>
-                                        <div class="ml-auto w-48 truncate text-slate-500 text-xs text-right">johnnydepp@left4code.com</div>
-                                    </a>
-                                    <a href="" class="flex items-center mt-2">
-                                        <div class="w-8 h-8 image-fit">
-                                            <img alt="Midone - HTML Admin Template" class="rounded-full" src="dist/images/profile-9.jpg">
-                                        </div>
-                                        <div class="ml-3">Morgan Freeman</div>
-                                        <div class="ml-auto w-48 truncate text-slate-500 text-xs text-right">morganfreeman@left4code.com</div>
-                                    </a>
+                                    <div class="mb-5">
+                                        <?php
+                                        $sql = "SELECT * FROM users LIMIT 4"; 
+                                        $result = mysqli_query($cnx, $sql);
+                                        
+                                        while($row = mysqli_fetch_assoc($result)) {
+                                            ?>
+                                            <a href="#" class="flex items-center mt-2">
+                                                <div class="w-8 h-8 image-fit">
+                                                    <img alt="Profile Picture" class="rounded-full" src="../dist/images/preview-9.jpg">
+                                                </div>
+                                                <div class="ml-3"><?php echo $row['nom']; ?></div>
+                                                <div class="ml-auto w-48 truncate text-slate-500 text-xs text-right"><?php echo $row['email']; ?></div>
+                                            </a>
+                                            <?php
+                                        }
+                                        ?>
                                 </div>
+                                <?php }?>
                                 <div class="search-result__content__title">Products</div>
-                                <a href="" class="flex items-center mt-2">
-                                    <div class="w-8 h-8 image-fit">
-                                        <img alt="Midone - HTML Admin Template" class="rounded-full" src="dist/images/preview-9.jpg">
-                                    </div>
-                                    <div class="ml-3">Oppo Find X2 Pro</div>
-                                    <div class="ml-auto w-48 truncate text-slate-500 text-xs text-right">Smartphone &amp; Tablet</div>
-                                </a>
-                                <a href="" class="flex items-center mt-2">
-                                    <div class="w-8 h-8 image-fit">
-                                        <img alt="Midone - HTML Admin Template" class="rounded-full" src="dist/images/preview-1.jpg">
-                                    </div>
-                                    <div class="ml-3">Nikon Z6</div>
-                                    <div class="ml-auto w-48 truncate text-slate-500 text-xs text-right">Photography</div>
-                                </a>
-                                <a href="" class="flex items-center mt-2">
-                                    <div class="w-8 h-8 image-fit">
-                                        <img alt="Midone - HTML Admin Template" class="rounded-full" src="dist/images/preview-2.jpg">
-                                    </div>
-                                    <div class="ml-3">Sony Master Series A9G</div>
-                                    <div class="ml-auto w-48 truncate text-slate-500 text-xs text-right">Electronic</div>
-                                </a>
-                                <a href="" class="flex items-center mt-2">
-                                    <div class="w-8 h-8 image-fit">
-                                        <img alt="Midone - HTML Admin Template" class="rounded-full" src="dist/images/preview-8.jpg">
-                                    </div>
-                                    <div class="ml-3">Dell XPS 13</div>
-                                    <div class="ml-auto w-48 truncate text-slate-500 text-xs text-right">PC &amp; Laptop</div>
-                                </a>
+                                <div class="mb-5">
+                                        <?php
+                                        $sql_pro = "SELECT * FROM product WHERE qte<20 LIMIT 4" ; 
+                                        $result_pro = mysqli_query($cnx, $sql_pro);
+                                        
+                                        while($row = mysqli_fetch_assoc($result_pro)) {
+                                            ?>
+                                            <a href="" class="flex items-center mt-2">
+                                                <div class="w-8 h-8 image-fit">
+                                                    <img alt="Midone - HTML Admin Template" class="rounded-full" src="../dist/images/preview-9.jpg">
+                                                </div>
+                                                <div class="ml-3"><?php echo $row['libelle']; ?></div>
+                                                <div class="ml-auto w-48 truncate text-slate-500 text-xs text-right"><?php echo $row['Qte']; ?></div>
+                                            </a>
+                                            <?php
+                                        }
+                                        ?>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- END: Search -->
                     <!-- BEGIN: Notifications -->
-                    <div class="intro-x dropdown mr-auto sm:mr-6">
+                    <!-- <div class="intro-x dropdown mr-auto sm:mr-6">
                         <div class="dropdown-toggle notification notification--bullet cursor-pointer" role="button" aria-expanded="false" data-tw-toggle="dropdown"> <i data-lucide="bell" class="notification__icon dark:text-slate-500"></i> </div>
                         <div class="notification-content pt-2 dropdown-menu">
                             <div class="notification-content__box dropdown-content">
                                 <div class="notification-content__title">Notifications</div>
                                 <div class="cursor-pointer relative flex items-center ">
                                     <div class="w-12 h-12 flex-none image-fit mr-1">
-                                        <img alt="Midone - HTML Admin Template" class="rounded-full" src="dist/images/profile-7.jpg">
+                                        <img alt="Midone - HTML Admin Template" class="rounded-full" src="../dist/images/profile-7.jpg">
                                         <div class="w-3 h-3 bg-success absolute right-0 bottom-0 rounded-full border-2 border-white dark:border-darkmode-600"></div>
                                     </div>
                                     <div class="ml-2 overflow-hidden">
@@ -159,7 +137,7 @@ if(!isset($_SESSION["id_user"]) ||  (isset($_SESSION["id_user"]) && $_SESSION['i
                                 </div>
                                 <div class="cursor-pointer relative flex items-center mt-5">
                                     <div class="w-12 h-12 flex-none image-fit mr-1">
-                                        <img alt="Midone - HTML Admin Template" class="rounded-full" src="dist/images/profile-2.jpg">
+                                        <img alt="Midone - HTML Admin Template" class="rounded-full" src="../dist/images/profile-2.jpg">
                                         <div class="w-3 h-3 bg-success absolute right-0 bottom-0 rounded-full border-2 border-white dark:border-darkmode-600"></div>
                                     </div>
                                     <div class="ml-2 overflow-hidden">
@@ -172,7 +150,7 @@ if(!isset($_SESSION["id_user"]) ||  (isset($_SESSION["id_user"]) && $_SESSION['i
                                 </div>
                                 <div class="cursor-pointer relative flex items-center mt-5">
                                     <div class="w-12 h-12 flex-none image-fit mr-1">
-                                        <img alt="Midone - HTML Admin Template" class="rounded-full" src="dist/images/profile-5.jpg">
+                                        <img alt="Midone - HTML Admin Template" class="rounded-full" src="../dist/images/profile-5.jpg">
                                         <div class="w-3 h-3 bg-success absolute right-0 bottom-0 rounded-full border-2 border-white dark:border-darkmode-600"></div>
                                     </div>
                                     <div class="ml-2 overflow-hidden">
@@ -185,7 +163,7 @@ if(!isset($_SESSION["id_user"]) ||  (isset($_SESSION["id_user"]) && $_SESSION['i
                                 </div>
                                 <div class="cursor-pointer relative flex items-center mt-5">
                                     <div class="w-12 h-12 flex-none image-fit mr-1">
-                                        <img alt="Midone - HTML Admin Template" class="rounded-full" src="dist/images/profile-9.jpg">
+                                        <img alt="Midone - HTML Admin Template" class="rounded-full" src="../dist/images/profile-9.jpg">
                                         <div class="w-3 h-3 bg-success absolute right-0 bottom-0 rounded-full border-2 border-white dark:border-darkmode-600"></div>
                                     </div>
                                     <div class="ml-2 overflow-hidden">
@@ -198,7 +176,7 @@ if(!isset($_SESSION["id_user"]) ||  (isset($_SESSION["id_user"]) && $_SESSION['i
                                 </div>
                                 <div class="cursor-pointer relative flex items-center mt-5">
                                     <div class="w-12 h-12 flex-none image-fit mr-1">
-                                        <img alt="Midone - HTML Admin Template" class="rounded-full" src="dist/images/profile-1.jpg">
+                                        <img alt="Midone - HTML Admin Template" class="rounded-full" src="../dist/images/profile-1.jpg">
                                         <div class="w-3 h-3 bg-success absolute right-0 bottom-0 rounded-full border-2 border-white dark:border-darkmode-600"></div>
                                     </div>
                                     <div class="ml-2 overflow-hidden">
@@ -211,7 +189,7 @@ if(!isset($_SESSION["id_user"]) ||  (isset($_SESSION["id_user"]) && $_SESSION['i
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- END: Notifications -->
                     <!-- BEGIN: Account Menu -->
                     <?php

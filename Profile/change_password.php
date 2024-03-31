@@ -50,7 +50,7 @@ if(!isset($_SESSION["id_user"]) ||  (isset($_SESSION["id_user"]) && $_SESSION['i
                     </nav>
                     <!-- END: Breadcrumb -->
                     <!-- BEGIN: Search -->
-                    <div class="intro-x relative mr-3 sm:mr-6">
+                    <!-- <div class="intro-x relative mr-3 sm:mr-6">
                         <div class="search hidden sm:block">
                             <input type="text" class="search__input form-control border-transparent" placeholder="Search...">
                             <i data-lucide="search" class="search__icon dark:text-slate-500"></i> 
@@ -135,10 +135,10 @@ if(!isset($_SESSION["id_user"]) ||  (isset($_SESSION["id_user"]) && $_SESSION['i
                                 </a>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- END: Search -->
                     <!-- BEGIN: Notifications -->
-                    <div class="intro-x dropdown mr-auto sm:mr-6">
+                    <!-- <div class="intro-x dropdown mr-auto sm:mr-6">
                         <div class="dropdown-toggle notification notification--bullet cursor-pointer" role="button" aria-expanded="false" data-tw-toggle="dropdown"> <i data-lucide="bell" class="notification__icon dark:text-slate-500"></i> </div>
                         <div class="notification-content pt-2 dropdown-menu">
                             <div class="notification-content__box dropdown-content">
@@ -210,7 +210,7 @@ if(!isset($_SESSION["id_user"]) ||  (isset($_SESSION["id_user"]) && $_SESSION['i
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- END: Notifications -->
                     <!-- BEGIN: Account Menu -->
                     <?php

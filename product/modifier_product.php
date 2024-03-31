@@ -1,14 +1,20 @@
 <?php
 SESSION_START();
 
-if(!isset($_SESSION["id_user"]) ||  (isset($_SESSION["id_user"]) && $_SESSION['id_user'] =='')) {
-    header('location: ../login.php');
-}
-if($_SESSION['role'] != 'admin') {
-    header('location: ../error_page.php');
-    exit; 
-}
 include("../securite/cnx.php");
+?>
+<?php
+$id_modifier=$_GET["modifier_product"];
+if($_SERVER['REQUEST_METHOD']=="POST" and isset($_POST['add_product'])){
+    $libelle = $_POST['Libelle'];
+    $qte=$_POST['Qte'];
+    $prix=$_POST['Prix'];
+
+    $req_add_product="UPDATE product SET libelle='$libelle' ,qte='$qte',prix='$prix' where id='$id_modifier'";
+    if((mysqli_query($cnx, $req_add_product))){
+        header("location: ./product_list.php");
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en" class="light">
@@ -20,7 +26,7 @@ include("../securite/cnx.php");
         <meta name="description" content="Midone admin is super flexible, powerful, clean & modern responsive tailwind admin template with unlimited possibilities.">
         <meta name="keywords" content="admin template, Midone Admin Template, dashboard template, flat admin template, responsive admin template, web app">
         <meta name="author" content="LEFT4CODE">
-        <title>Users</title>
+        <title>Add Product</title>
         <!-- BEGIN: CSS Assets-->
         <link rel="stylesheet" href="../dist/css/app.css" />
         <!-- END: CSS Assets-->
@@ -29,16 +35,16 @@ include("../securite/cnx.php");
     <body class="py-5">
         <!-- BEGIN: Mobile Menu -->
         <div class="mobile-menu md:hidden">
-            <?php 
-                $page_menu="users";
+            <?php
+                $page_menu="modifier_product";
                 include("../menu_mobile.php");
             ?>
         </div>
         <!-- END: Mobile Menu -->
         <div class="flex mt-[4.7rem] md:mt-0">
             <!-- BEGIN: Side Menu -->
-            <?php 
-                $page_menu="users";
+            <?php
+                $page_menu="modifier_product";
                 include("../menu_desktop.php");
             ?>
             <!-- END: Side Menu -->
@@ -49,7 +55,8 @@ include("../securite/cnx.php");
                     <!-- BEGIN: Breadcrumb -->
                     <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="">Users</a></li>
+                            <li class="breadcrumb-item"><a href="#">Product</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Modifier Product</li>
                         </ol>
                     </nav>
                     <!-- END: Breadcrumb -->
@@ -217,113 +224,99 @@ include("../securite/cnx.php");
                     </div> -->
                     <!-- END: Notifications -->
                     <!-- BEGIN: Account Menu -->
-                    <?php
-                        include("../menu_account.php");
-                    ?>
+                        <?php
+                            include("../menu_account.php");
+                        ?>
                     <!-- END: Account Menu -->
                 </div>
                 <!-- END: Top Bar -->
-                <h2 class="intro-y text-lg font-medium mt-10">
-                    All Users 
-                </h2>
-                <div class="grid grid-cols-12 gap-6 mt-5">
-                    <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
-                        <button class="btn btn-primary shadow-md mr-2">Add New User</button>
-                        <?php 
-                            $req_count_user=mysqli_query($cnx,"SELECT COUNT(*) AS user_count FROM users");
-                            $count_result = mysqli_fetch_assoc($req_count_user);
-                            $user_count = $count_result['user_count'];
-
-                            $_SESSION['user_count'] = $user_count;
+                <div class="intro-y flex items-center mt-8">
+                    <h2 class="text-lg font-medium mr-auto">
+                        Modifier Product 
+                    </h2>
+                </div>
+                <div class="grid grid-cols-12 gap-6 mt-5 ">
+                    <div class="intro-y col-span-12 lg:col-span-12 justify-content-center mx-auto">
+                        <!-- BEGIN: Form Layout -->
+                        <?php
+                            $data_product=mysqli_fetch_array(mysqli_query($cnx,"SELECT * FROM product WHERE id ='$id_modifier'"));
                         ?>
-                        <div class="hidden md:block mx-auto text-slate-500">Showing 1 to 10 of <?php echo $user_count; ?> entries</div>
-                        <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
-                            <div class="w-56 relative text-slate-500">
-                                <input type="text" class="form-control w-56 box pr-10" placeholder="Search...">
-                                <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" data-lucide="search"></i> 
+                        <form method="post" class="intro-y box p-5">
+                            <div>
+                                <label for="crud-form-1" class="form-label">Product Name</label>
+                                <input id="crud-form-1" type="text" class="form-control w-full" value="<?php echo $data_product['libelle'];?>" name="Libelle">
                             </div>
-                        </div>
-                    </div>
-                    <!-- BEGIN: Users Layout -->
-                    <?php
-                         $req_users="SELECT * FROM users";
-                         $req_users=mysqli_query($cnx, $req_users);
-                         $data_users=mysqli_fetch_array($req_users);
-                        
-                        while ($row=mysqli_fetch_array($req_users))   { ?>
-                        <div class="intro-y col-span-12 md:col-span-6">
-                        <div class="box">
-                            <div class="flex flex-col lg:flex-row items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400 m">
-                                <div class="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
-                                    <img alt="Midone - HTML Admin Template" class="rounded-full" src="../dist/images/profile-1.jpg">
-                                </div>
-                                <div class="lg:ml-2 lg:mr-auto text-center lg:text-left mt-3 lg:mt-0">
-                                    <a href="" class="font-medium"><?php echo $row['nom'] ?></a> 
-                                    <div class="text-slate-500 text-xs mt-0.5"><?php echo ucfirst($row['role']) ?></div>
-                                </div>
-                                <div class="flex -ml-2 lg:ml-0 lg:justify-end mt-3 lg:mt-0">
-                                    <a href="" class="w-8 h-8 rounded-full flex items-center justify-center border dark:border-darkmode-400 ml-2 text-slate-400 zoom-in tooltip" title="Facebook"> <i class="w-3 h-3 fill-current" data-lucide="facebook"></i> </a>
-                                    <a href="" class="w-8 h-8 rounded-full flex items-center justify-center border dark:border-darkmode-400 ml-2 text-slate-400 zoom-in tooltip" title="Twitter"> <i class="w-3 h-3 fill-current" data-lucide="twitter"></i> </a>
-                                    <a href="" class="w-8 h-8 rounded-full flex items-center justify-center border dark:border-darkmode-400 ml-2 text-slate-400 zoom-in tooltip" title="Linked In"> <i class="w-3 h-3 fill-current" data-lucide="linkedin"></i> </a>
+                            <!-- <div class="mt-3">
+                                <label for="crud-form-2" class="form-label">Category</label>
+                                <select data-placeholder="Select your favorite actors" class="tom-select w-full" id="crud-form-2" multiple>
+                                    <option value="1" selected>Sport & Outdoor</option>
+                                    <option value="2">PC & Laptop</option>
+                                    <option value="3" selected>Smartphone & Tablet</option>
+                                    <option value="4">Photography</option>
+                                </select>
+                            </div> -->
+                            <div class="mt-3">
+                                <label for="crud-form-3" class="form-label">Quantity</label>
+                                <div class="input-group">
+                                    <input id="crud-form-3" type="number" class="form-control" value="<?php echo $data_product['Qte'];?>" aria-describedby="input-group-1" name="Qte">
+                                    <div id="input-group-1" class="input-group-text">pcs</div>
                                 </div>
                             </div>
-                            <div class="flex flex-wrap lg:flex-nowrap items-center justify-center p-5">
-                                <div class="w-full lg:w-1/2 mb-4 lg:mb-0 mr-auto">
-                                    <div class="flex text-slate-500 text-xs">
-                                        <div class="mr-auto">Progress</div>
-                                        <div>20%</div>
+                            <!-- <div class="mt-3">
+                                <label for="crud-form-4" class="form-label">Weight</label>
+                                <div class="input-group">
+                                    <input id="crud-form-4" type="text" class="form-control" placeholder="Weight" aria-describedby="input-group-2">
+                                    <div id="input-group-2" class="input-group-text">grams</div>
+                                </div>
+                            </div> -->
+                            <div class="mt-3">
+                                <label class="form-label">Price</label>
+                                <div class="sm:grid grid-cols-3 gap-2">
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" value="<?php echo $data_product['Prix'];?>" aria-describedby="input-group-3" name="Prix" accept="any">
+                                        <div id="input-group-3" class="input-group-text">Unit</div>
                                     </div>
-                                    <div class="progress h-1 mt-2">
-                                        <div class="progress-bar w-1/4 bg-primary" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <!-- <div class="input-group mt-2 sm:mt-0">
+                                        <div id="input-group-4" class="input-group-text">Wholesale</div>
+                                        <input type="text" class="form-control" placeholder="Wholesale" aria-describedby="input-group-4">
+                                    </div>
+                                    <div class="input-group mt-2 sm:mt-0">
+                                        <div id="input-group-5" class="input-group-text">Bulk</div>
+                                        <input type="text" class="form-control" placeholder="Bulk" aria-describedby="input-group-5">
+                                    </div> -->
+                                </div>
+                            </div>
+                            <!-- <div class="mt-3">
+                                <label>Active Status</label>
+                                <div class="form-switch mt-2">
+                                    <input type="checkbox" class="form-check-input">
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <label>Description</label>
+                                <div class="mt-2">
+                                    <div class="editor">
+                                        <p>Content of the editor.</p>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary py-1 px-2 mr-2">Message</button>
-                                <button class="btn btn-outline-secondary py-1 px-2">Profile</button>
+                            </div> -->
+                            <div class="text-right mt-5">
+                                <button type="restart" class="btn btn-outline-secondary w-24 mr-1">Cancel</button>
+                                <button type="submit" name="add_product" class="btn btn-primary w-24">Save</button>
                             </div>
-                        </div>
-                    </div> 
-                    <?php  } ?>
+                        </form>
+                        <!-- END: Form Layout -->
                     </div>
-                    <!-- END: Users Layout -->
-                    <!-- BEGIN: Pagination -->
-                    <div class="intro-y col-span-12 flex flex-wrap sm:flex-row sm:flex-nowrap items-center mt-4">
-                        <nav class="w-full sm:w-auto sm:mr-auto">
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" href="#"> <i class="w-4 h-4" data-lucide="chevrons-left"></i> </a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#"> <i class="w-4 h-4" data-lucide="chevron-left"></i> </a>
-                                </li>
-                                <li class="page-item"> <a class="page-link" href="#">...</a> </li>
-                                <li class="page-item active"> <a class="page-link" href="#">1</a> </li>
-                                <li class="page-item"> <a class="page-link" href="#">2</a> </li>
-                                <li class="page-item"> <a class="page-link" href="#">3</a> </li>
-                                <li class="page-item"> <a class="page-link" href="#">...</a> </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#"> <i class="w-4 h-4" data-lucide="chevron-right"></i> </a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#"> <i class="w-4 h-4" data-lucide="chevrons-right"></i> </a>
-                                </li>
-                            </ul>
-                        </nav>
-                        <select class="w-20 form-select box mt-3 sm:mt-0">
-                            <option>10</option>
-                            <option>25</option>
-                            <option>35</option>
-                            <option>50</option>
-                        </select>
-                    </div>
-                    <!-- END: Pagination -->
                 </div>
             </div>
             <!-- END: Content -->
-        </div>        
+        </div>
+        
         <!-- BEGIN: JS Assets-->
         <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=["your-google-map-api"]&libraries=places"></script>
         <script src="../dist/js/app.js"></script>
         <!-- END: JS Assets-->
+        <script src="../dist/js/ckeditor-classic.js"></script>
     </body>
 </html>
