@@ -277,7 +277,7 @@ if(!isset($_SESSION["id_user"]) ||  (isset($_SESSION["id_user"]) && $_SESSION['i
                                 </div>
                             </div>
                             <div class="p-5 border-t border-slate-200/60 dark:border-darkmode-400">
-                                <a class="flex items-center " href=""> <i data-lucide="activity" class="w-4 h-4 mr-2"></i> Personal Information </a>
+                                <a class="flex items-center " href="./mon_profile.php"> <i data-lucide="activity" class="w-4 h-4 mr-2"></i> Personal Information </a>
                                 <a class="flex items-center mt-5 " href=""> <i data-lucide="box" class="w-4 h-4 mr-2"></i> Account Settings </a>
                                 <a  class="flex items-center mt-5 text-primary font-medium" href=""> <i data-lucide="lock" class="w-4 h-4 mr-2"></i> Change Password </a>
                                 <a class="flex items-center mt-5" href=""> <i data-lucide="settings" class="w-4 h-4 mr-2"></i> User Settings </a>

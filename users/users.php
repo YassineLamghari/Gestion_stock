@@ -228,7 +228,7 @@ include("../securite/cnx.php");
                 </h2>
                 <div class="grid grid-cols-12 gap-6 mt-5">
                     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
-                        <button class="btn btn-primary shadow-md mr-2">Add New User</button>
+                        <a href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"><button class="btn btn-primary shadow-md mr-2">Add New User</button></a>
                         <?php 
                             $req_count_user=mysqli_query($cnx,"SELECT COUNT(*) AS user_count FROM users");
                             $count_result = mysqli_fetch_assoc($req_count_user);

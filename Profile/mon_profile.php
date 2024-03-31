@@ -263,7 +263,7 @@ if(!isset($_SESSION["id_user"]) ||  (isset($_SESSION["id_user"]) && $_SESSION['i
                             </div>
                             <div class="ml-5">
                                 <div class="w-24 sm:w-40 truncate sm:whitespace-normal font-medium text-lg"><?php echo $_SESSION['nom_user'] ?></div>
-                                <div class="text-slate-500">Frontend Engineer</div>
+                                <div class="text-slate-500"><?php echo ucfirst($_SESSION['role']) ?></div>
                             </div>
                         </div>
                         <div class="mt-6 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
@@ -297,7 +297,7 @@ if(!isset($_SESSION["id_user"]) ||  (isset($_SESSION["id_user"]) && $_SESSION['i
                             <a href="javascript:;" class="nav-link py-4 flex items-center" data-tw-target="#account" aria-selected="false" role="tab" > <i class="w-4 h-4 mr-2" data-lucide="shield"></i> Account </a>
                         </li>
                         <li id="change-password-tab" class="nav-item" role="presentation">
-                            <a href="javascript:;" class="nav-link py-4 flex items-center" data-tw-target="#change-password" aria-selected="false" role="tab" > <i class="w-4 h-4 mr-2" data-lucide="lock"></i> Change Password </a>
+                            <a href="./change_password.php" class="nav-link py-4 flex items-center" data-tw-target="#change-password" aria-selected="false" role="tab" > <i class="w-4 h-4 mr-2" data-lucide="lock"></i> Change Password </a>
                         </li>
                         <li id="settings-tab" class="nav-item" role="presentation">
                             <a href="javascript:;" class="nav-link py-4 flex items-center" data-tw-target="#settings" aria-selected="false" role="tab" > <i class="w-4 h-4 mr-2" data-lucide="settings"></i> Settings </a>
