@@ -591,8 +591,8 @@ include("../securite/cnx.php");
                                                 <a class="page-link" href="#"> <i class="w-4 h-4" data-lucide="chevron-left"></i> </a>
                                             </li>
                                             <li class="page-item"> <a class="page-link" href="#">...</a> </li>
-                                            <li class="page-item"> <a class="page-link" href="#">1</a> </li>
-                                            <li class="page-item active"> <a class="page-link" href="#">2</a> </li>
+                                            <li class="page-item active"> <a class="page-link" href="#">1</a> </li>
+                                            <li class="page-item "> <a class="page-link" href="#">2</a> </li>
                                             <li class="page-item"> <a class="page-link" href="#">3</a> </li>
                                             <li class="page-item"> <a class="page-link" href="#">...</a> </li>
                                             <li class="page-item">
