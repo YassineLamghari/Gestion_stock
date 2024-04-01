@@ -563,12 +563,14 @@ include("../securite/cnx.php");
                                                 <td class="text-center"><?php echo $row_product['Prix'] ?></td>
                                                 <td class="w-40">
                                                     <?php 
-                                                        if ($row_product['Qte'] <= 10) {
+                                                        if ($row_product['Qte'] <= 0) {
                                                             echo '<div class="flex items-center justify-center text-danger"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> Out Stock </div>';
-                                                        } else {
+                                                        } else if ($row_product['Qte'] >= 10) {
                                                             echo '<div class="flex items-center justify-center text-success"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> In Stock </div>';
+                                                        }else{
+                                                            echo '<div class="flex items-center justify-center text-warning"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> Low Stock </div>';
                                                         }
-                                                        ?>
+                                                    ?>
                                                 </td>
                                                 <td class="table-report__action w-56">
                                                     <div class="flex justify-center items-center">

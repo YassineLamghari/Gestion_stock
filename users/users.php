@@ -226,11 +226,21 @@ include("../securite/cnx.php");
                 <h2 class="intro-y text-lg font-medium mt-10">
                     All Users 
                 </h2>
+                <?php 
+                        $req_users = "select  * from users "; 
+                            $text_rechercher="";
+                            if (isset($_GET['rechercher'])) 
+                            {
+                                $text_rechercher=$_GET['search'];
+                                $req_users = "select  * from users WHERE nom LIKE '%". $text_rechercher ."%'"; 
+                            }
+
+                ?>
                 <div class="grid grid-cols-12 gap-6 mt-5">
                     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
-                        <a href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"><button class="btn btn-primary shadow-md mr-2">Add New User</button></a>
+                        <a href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"><button class="btn btn-primary shadow-md mr-2"><i data-lucide="user-plus" class="w-4 h-4 mr-2"></i>Add New User</button></a>
                         <?php 
-                            $req_count_user=mysqli_query($cnx,"SELECT COUNT(*) AS user_count FROM users");
+                            $req_count_user=mysqli_query($cnx,"SELECT COUNT(*) AS user_count FROM users WHERE nom like '%". $text_rechercher . "%'");
                             $count_result = mysqli_fetch_assoc($req_count_user);
                             $user_count = $count_result['user_count'];
 
@@ -239,18 +249,18 @@ include("../securite/cnx.php");
                         <div class="hidden md:block mx-auto text-slate-500">Showing 1 to 10 of <?php echo $user_count; ?> entries</div>
                         <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
                             <div class="w-56 relative text-slate-500">
-                                <input type="text" class="form-control w-56 box pr-10" placeholder="Search...">
-                                <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" data-lucide="search"></i> 
+                            <form method="get" class="w-56 relative text-slate-500">
+                                <input type="text" class="form-control w-56 box pr-10" name="search" placeholder="<?php echo $text_rechercher; ?>">
+                                <button type="submit" name="rechercher"><i class="absolute my-auto inset-y-0 mt-2 mr-3 right-0" data-lucide="search"></i></button> 
+                            </form>
                             </div>
                         </div>
                     </div>
                     <!-- BEGIN: Users Layout -->
                     <?php
-                         $req_users="SELECT * FROM users";
-                         $req_users=mysqli_query($cnx, $req_users);
-                         $data_users=mysqli_fetch_array($req_users);
-                        
-                        while ($row=mysqli_fetch_array($req_users))   { ?>
+                        $res_users=mysqli_query($cnx,$req_users);
+                        while ($row=mysqli_fetch_array($res_users)){ 
+                    ?>
                         <div class="intro-y col-span-12 md:col-span-6">
                         <div class="box">
                             <div class="flex flex-col lg:flex-row items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400 m">

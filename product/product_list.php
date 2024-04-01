@@ -1,6 +1,8 @@
 <?php
 SESSION_START();
-
+if(!isset($_SESSION["id_user"]) ||  (isset($_SESSION["id_user"]) && $_SESSION['id_user'] =='')) {
+    header('location: ../login.php');
+}
 include("../securite/cnx.php");
 ?>
 <?php
@@ -228,20 +230,34 @@ if(isset($_GET['supprimer_product'])){
                 <h2 class="intro-y text-lg font-medium mt-10">
                     Product List
                 </h2>
+                <?php 
+                        $req_product = "select  * from product "; 
+                            $text_rechercher="";
+                            if (isset($_GET['rechercher'])) 
+                            {
+                                $text_rechercher=$_GET['search'];
+                                $req_product = "select  * from product where libelle like '%".$text_rechercher."%'"; 
+                            }
+
+                ?>
                 <div class="grid grid-cols-12 gap-6 mt-5">
                     <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
-                        <a href="./add_product.php"><button class="btn btn-primary shadow-md mr-2">Add New Product</button></a>
                         <?php 
-                            $req_count_product=mysqli_query($cnx,"SELECT COUNT(*) AS product_count FROM product");
+                            if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
+                                echo '<a href="./add_product.php"><button class="btn btn-primary shadow-md mr-2">Add New Product</button></a>';
+                            }
+                        ?>
+                        <?php 
+                            $req_count_product=mysqli_query($cnx,"SELECT COUNT(*) AS product_count FROM product WHERE libelle LIKE '%" . $text_rechercher . "%'");
                             $count_result = mysqli_fetch_assoc($req_count_product);
                             $product_count = $count_result['product_count'];
                         ?>
                         <div class="hidden md:block mx-auto text-slate-500">Showing 1 to 10 of <?php echo $product_count ?> entries</div>
                         <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
-                            <div class="w-56 relative text-slate-500">
-                                <input type="text" class="form-control w-56 box pr-10" placeholder="Search...">
-                                <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" data-lucide="search"></i> 
-                            </div>
+                            <form method="get" class="w-56 relative text-slate-500">
+                                <input type="text" class="form-control w-56 box pr-10" name="search" placeholder="<?php echo $text_rechercher; ?>">
+                                <button type="submit" name="rechercher"><i class="absolute my-auto inset-y-0 mt-2 mr-3 right-0" data-lucide="search"></i></button> 
+                            </form>
                         </div>
                     </div>
                     <!-- BEGIN: Data List -->
@@ -259,10 +275,7 @@ if(isset($_GET['supprimer_product'])){
                             </thead>
                             <tbody>
                                 <?php 
-                                    $req_product="SELECT * FROM product";
-                                    $res_product=mysqli_query($cnx,$req_product);
-                                    $data_product=mysqli_fetch_array($res_product);  
-                                    
+                                    $res_product=mysqli_query($cnx,$req_product); 
                                     while($row_product=mysqli_fetch_array($res_product)){ 
                                 ?>
                                 <tr class="intro-x">
@@ -281,19 +294,39 @@ if(isset($_GET['supprimer_product'])){
                                     <td class="text-center"><?php echo $row_product['Prix'] ?></td>
                                     <td class="w-40">
                                         <?php 
-                                            if ($row_product['Qte'] <= 10) {
+                                            if ($row_product['Qte'] <= 0) {
                                                 echo '<div class="flex items-center justify-center text-danger"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> Out Stock </div>';
-                                            } else {
+                                            } else if ($row_product['Qte'] >= 10) {
                                                 echo '<div class="flex items-center justify-center text-success"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> In Stock </div>';
+                                            }else{
+                                                echo '<div class="flex items-center justify-center text-warning"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> Low Stock </div>';
                                             }
-                                            ?>
+                                        ?>
                                     </td>
-                                    <td class="table-report__action w-56">
-                                        <div class="flex justify-center items-center">
-                                            <a class="flex items-center mr-3" href="./modifier_product.php?modifier_product=<?php echo $row_product['id'] ?>"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                                            <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
-                                        </div>
-                                    </td>
+                                    <?php if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin') { 
+                                        echo    '<td class="table-report__action w-56">
+                                            <div class="flex justify-center items-center">
+                                                <a class="flex items-center mr-3" href="./modifier_product.php?modifier_product='.$row_product['id'].'"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
+                                                <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
+                                            </div>
+                                        </td>';
+                                    }else{
+                                    
+                                            if ($row_product['Qte'] <= 0) {
+                                                echo    '<td class="table-report__action w-56">
+                                                            <div class="flex justify-center items-center">
+                                                                <a class="flex items-center mr-3 text-danger"> <i data-lucide="x-square" class="w-4 h-4 mr-1"></i> Out Of Stock </a>
+                                                            </div>
+                                                        </td>';
+                                            } else {
+                                                    echo '<td class="table-report__action w-56">
+                                                            <div class="flex justify-center items-center">
+                                                                <a class="flex items-center mr-3 text-success" href="./modifier_product.php?acheter_product='.$row_product['id'].'"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Order </a>
+                                                            </div>
+                                                        </td>';
+                                            }
+                                        }?>
+                                    
                                 </tr>
                                 <?php } ?>
                             </tbody>
