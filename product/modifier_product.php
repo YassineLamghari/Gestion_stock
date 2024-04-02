@@ -4,16 +4,20 @@ SESSION_START();
 include("../securite/cnx.php");
 ?>
 <?php
+$msg = "";
 $id_modifier=$_GET["modifier_product"];
 if($_SERVER['REQUEST_METHOD']=="POST" and isset($_POST['add_product'])){
     $libelle = $_POST['Libelle'];
     $qte=$_POST['Qte'];
     $prix=$_POST['Prix'];
 
-    $req_add_product="UPDATE product SET libelle='$libelle' ,qte='$qte',prix='$prix' where id='$id_modifier'";
+    if($qte>=0 and $prix>=0){
+        $req_add_product="UPDATE product SET libelle='$libelle' ,qte='$qte',prix='$prix' where id='$id_modifier'";
     if((mysqli_query($cnx, $req_add_product))){
         header("location: ./product_list.php");
-    }
+    }}else{
+        $msg="Qte or Prix Invalid !";
+}
 }
 ?>
 <!DOCTYPE html>
@@ -242,6 +246,9 @@ if($_SERVER['REQUEST_METHOD']=="POST" and isset($_POST['add_product'])){
                             $data_product=mysqli_fetch_array(mysqli_query($cnx,"SELECT * FROM product WHERE id ='$id_modifier'"));
                         ?>
                         <form method="post" class="intro-y box p-5">
+                            <?php
+                                echo '<h1 class="text-center text-danger">' . $msg . '</h1>';
+                            ?>
                             <div>
                                 <label for="crud-form-1" class="form-label">Product Name</label>
                                 <input id="crud-form-1" type="text" class="form-control w-full" value="<?php echo $data_product['libelle'];?>" name="Libelle">

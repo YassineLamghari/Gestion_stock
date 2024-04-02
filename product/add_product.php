@@ -6,14 +6,20 @@ if(!isset($_SESSION["id_user"]) ||  (isset($_SESSION["id_user"]) && $_SESSION['i
 include("../securite/cnx.php");
 ?>
 <?php
+$msg="";
 if(isset($_POST['add_product'])){
     $libelle = $_POST['Libelle'];
     $qte=$_POST['Qte'];
     $prix=$_POST['Prix'];
 
-    $req_add_product="INSERT INTO product (libelle,qte,prix) VALUES ('$libelle','$qte','$prix')";
-    if((mysqli_query($cnx, $req_add_product))){
-        header("location: ./product_list.php");
+    if($qte>=0 and $prix>=0){
+        $req_add_product="INSERT INTO product (libelle,qte,prix) VALUES ('$libelle','$qte','$prix')";
+        if((mysqli_query($cnx, $req_add_product)))
+        {
+            header("location: ./product_list.php");
+        }   
+    }else{
+        $msg="Qte or Prix Invalid !";
     }
 }
 ?>
@@ -240,6 +246,9 @@ if(isset($_POST['add_product'])){
                     <div class="intro-y col-span-12 lg:col-span-12 justify-content-center mx-auto">
                         <!-- BEGIN: Form Layout -->
                         <form method="post" class="intro-y box p-5">
+                            <?php
+                                echo '<h1 class="text-center text-danger">' . $msg . '</h1>';
+                            ?>
                             <div>
                                 <label for="crud-form-1" class="form-label">Product Name</label>
                                 <input id="crud-form-1" type="text" class="form-control w-full" placeholder="Product Name" name="Libelle">
