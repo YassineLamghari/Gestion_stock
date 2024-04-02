@@ -319,11 +319,7 @@ include('../securite/cnx.php');
                                     
                                         if($new_pass == $con_new_pass){
                                             $req_new="UPDATE users SET password='$new_pass' WHERE id ='$id_user'";
-                                            if(mysqli_query($cnx,$req_new)){
-                                                $res_js=True;
-                                            }else{
-                                                $res_js=False;
-                                            }
+                                            mysqli_query($cnx,$req_new);
                                         }
                                     }
                                 }
