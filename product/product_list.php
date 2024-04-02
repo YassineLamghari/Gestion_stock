@@ -1,8 +1,10 @@
 <?php
 SESSION_START();
+
 if(!isset($_SESSION["id_user"]) ||  (isset($_SESSION["id_user"]) && $_SESSION['id_user'] =='')) {
     header('location: ../login.php');
 }
+$count_pro=$_SESSION['count'];
 include("../securite/cnx.php");
 ?>
 <?php
@@ -251,6 +253,7 @@ if(isset($_GET['supprimer_product'])){
                             $req_count_product=mysqli_query($cnx,"SELECT COUNT(*) AS product_count FROM product WHERE libelle LIKE '%" . $text_rechercher . "%'");
                             $count_result = mysqli_fetch_assoc($req_count_product);
                             $product_count = $count_result['product_count'];
+                            $_SESSION['count'] =$count_result['product_count'] ;
                         ?>
                         <div class="hidden md:block mx-auto text-slate-500">Showing 1 to 10 of <?php echo $product_count ?> entries</div>
                         <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">

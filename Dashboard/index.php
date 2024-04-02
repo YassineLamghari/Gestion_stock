@@ -4,8 +4,25 @@ SESSION_START();
 if(!isset($_SESSION["id_user"]) ||  (isset($_SESSION["id_user"]) && $_SESSION['id_user'] =='')) {
     header('location: ../login.php');
 }
-include("../securite/cnx.php");
 ?>
+<?php
+include("../securite/cnx.php");
+
+?>
+<?php 
+    $req_count_user=mysqli_query($cnx,"SELECT COUNT(*) AS user_count FROM users ");
+    $count_result = mysqli_fetch_assoc($req_count_user);
+    $user_count = $count_result['user_count'];
+
+    $_SESSION['user_count'] = $user_count;
+?>
+<?php 
+    $req_count_product=mysqli_query($cnx,"SELECT COUNT(*) AS product_count FROM product");
+    $count_result = mysqli_fetch_assoc($req_count_product);
+    $count_pro = $count_result['product_count'];
+    $_SESSION['count'] =$count_pro ;
+?>
+
 
 <!DOCTYPE html>
 <html lang="en" class="light">
@@ -244,10 +261,10 @@ include("../securite/cnx.php");
                                                 <div class="flex">
                                                     <i data-lucide="monitor" class="report-box__icon text-warning"></i> 
                                                     <div class="ml-auto">
-                                                        <div class="report-box__indicator bg-success tooltip cursor-pointer" title="12% Higher than last month"> 12% <i data-lucide="chevron-up" class="w-4 h-4 ml-0.5"></i> </div>
+                                                        <div class="report-box__indicator bg-success tooltip cursor-pointer" title="<?php echo $count_pro ?>% Higher than last month"> <?php echo $count_pro ?>% <i data-lucide="chevron-up" class="w-4 h-4 ml-0.5"></i> </div>
                                                     </div>
                                                 </div>
-                                                <div class="text-3xl font-medium leading-8 mt-6">2.149</div>
+                                                <div class="text-3xl font-medium leading-8 mt-6"><?php echo $count_pro ?></div>
                                                 <div class="text-base text-slate-500 mt-1">Total Products</div>
                                             </div>
                                         </div>
@@ -258,10 +275,10 @@ include("../securite/cnx.php");
                                                 <div class="flex">
                                                     <i data-lucide="user" class="report-box__icon text-success"></i> 
                                                     <div class="ml-auto">
-                                                        <div class="report-box__indicator bg-success tooltip cursor-pointer" title="22% Higher than last month"> 22% <i data-lucide="chevron-up" class="w-4 h-4 ml-0.5"></i> </div>
+                                                        <div class="report-box__indicator bg-success tooltip cursor-pointer" title="<?php echo $user_count ?>% Higher than last month"> <?php echo $user_count ?>% <i data-lucide="chevron-up" class="w-4 h-4 ml-0.5"></i> </div>
                                                     </div>
                                                 </div>
-                                                <div class="text-3xl font-medium leading-8 mt-6">152.040</div>
+                                                <div class="text-3xl font-medium leading-8 mt-6"><?php echo $user_count ?></div>
                                                 <div class="text-base text-slate-500 mt-1">Unique Visitor</div>
                                             </div>
                                         </div>

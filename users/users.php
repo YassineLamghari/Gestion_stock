@@ -8,6 +8,7 @@ if($_SESSION['role'] != 'admin') {
     header('location: ../error_page.php');
     exit; 
 }
+$user_count = $_SESSION['user_count'] ;
 include("../securite/cnx.php");
 ?>
 <!DOCTYPE html>
@@ -244,7 +245,6 @@ include("../securite/cnx.php");
                             $count_result = mysqli_fetch_assoc($req_count_user);
                             $user_count = $count_result['user_count'];
 
-                            $_SESSION['user_count'] = $user_count;
                         ?>
                         <div class="hidden md:block mx-auto text-slate-500">Showing 1 to 10 of <?php echo $user_count; ?> entries</div>
                         <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
