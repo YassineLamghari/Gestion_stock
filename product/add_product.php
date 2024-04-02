@@ -1,6 +1,8 @@
 <?php
 SESSION_START();
-
+if(!isset($_SESSION["id_user"]) ||  (isset($_SESSION["id_user"]) && $_SESSION['id_user'] =='')) {
+    header('location: ../login.php');
+}
 include("../securite/cnx.php");
 ?>
 <?php

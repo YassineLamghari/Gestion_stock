@@ -4,6 +4,8 @@ SESSION_START();
 if(!isset($_SESSION["id_user"]) ||  (isset($_SESSION["id_user"]) && $_SESSION['id_user'] =='')) {
     header('location: ../login.php');
 }
+
+include('../securite/cnx.php');
 ?>
 <!DOCTYPE html>
 <html lang="en" class="light">
@@ -18,6 +20,7 @@ if(!isset($_SESSION["id_user"]) ||  (isset($_SESSION["id_user"]) && $_SESSION['i
         <title>Update Profile</title>
         <!-- BEGIN: CSS Assets-->
         <link rel="stylesheet" href="../dist/css/app.css" />
+        <script src="../sweetalert2.js"></script>
         <!-- END: CSS Assets-->
     </head>
     <!-- END: Head -->
@@ -302,20 +305,43 @@ if(!isset($_SESSION["id_user"]) ||  (isset($_SESSION["id_user"]) && $_SESSION['i
                                     Change Password
                                 </h2>
                             </div>
+                            <?php 
+                                $id_user = $_SESSION["id_user"];
+                                if(isset($_POST['change_password'])){
+                                    $old_pass=$_POST['old_password'];
+                                    $new_pass=$_POST['new_password'];
+                                    $con_new_pass=$_POST['confirm_new_password'];
+                                    
+                                    $req_old="SELECT password FROM users WHERE id='$id_user'";
+                                    $result=mysqli_query($cnx,$req_old);
+                                    $row=mysqli_fetch_assoc($result);
+                                    if($row['password'] == $old_pass){
+                                    
+                                        if($new_pass == $con_new_pass){
+                                            $req_new="UPDATE users SET password='$new_pass' WHERE id ='$id_user'";
+                                            if(mysqli_query($cnx,$req_new)){
+                                                $res_js=True;
+                                            }else{
+                                                $res_js=False;
+                                            }
+                                        }
+                                    }
+                                }
+                            ?>
                             <form method="post" class="p-5">
                                 <div>
                                     <label for="change-password-form-1" class="form-label">Old Password</label>
-                                    <input id="change-password-form-1" type="password" class="form-control" placeholder="Old Password">
+                                    <input id="change-password-form-1" type="password" class="form-control" placeholder="Old Password" name="old_password">
                                 </div>
                                 <div class="mt-3">
                                     <label for="change-password-form-2" class="form-label">New Password</label>
-                                    <input id="change-password-form-2" type="password" class="form-control" placeholder="New Password">
+                                    <input id="change-password-form-2" type="password" class="form-control" placeholder="New Password" name="new_password">
                                 </div>
                                 <div class="mt-3">
                                     <label for="change-password-form-3" class="form-label">Confirm New Password</label>
-                                    <input id="change-password-form-3" type="password" class="form-control" placeholder="Confirm New Password">
+                                    <input id="change-password-form-3" type="password" class="form-control" placeholder="Confirm New Password" name="confirm_new_password">
                                 </div>
-                                <button type="submit"  class="btn btn-primary mt-4">Change Password</button>
+                                <button type="submit" name="change_password" class="btn btn-primary mt-4">Change Password</button>
                             </form>
                         </div>
                         <!-- END: Change Password -->
