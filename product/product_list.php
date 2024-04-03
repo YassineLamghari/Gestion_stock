@@ -280,6 +280,8 @@ if(isset($_GET['supprimer_product'])){
                                 <?php 
                                     $res_product=mysqli_query($cnx,$req_product); 
                                     while($row_product=mysqli_fetch_array($res_product)){ 
+                                        $data_product['id']=$row_product['id'];
+                                        $data_product['libelle']=$row_product['libelle'];
                                 ?>
                                 <tr class="intro-x">
                                     <td class="w-40">
@@ -377,7 +379,7 @@ if(isset($_GET['supprimer_product'])){
                                     <i data-lucide="x-circle" class="w-16 h-16 text-danger mx-auto mt-3"></i> 
                                     <div class="text-3xl mt-5">Are you sure?</div>
                                     <div class="text-slate-500 mt-2">
-                                        Do you really want to delete these product : <?php echo $data_product['libelle'] ?> ? 
+                                        Do you really want to delete these product :<?php echo $data_product['libelle'] ?>  ? 
                                     </div>
                                 </div>
                                 <div class="px-5 pb-8 text-center">
