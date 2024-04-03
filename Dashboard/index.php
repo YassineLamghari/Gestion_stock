@@ -577,7 +577,7 @@ include("../securite/cnx.php");
                                                     <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">Sport &amp; Outdoor</div>
                                                 </td>
                                                 <td class="text-center"><?php echo $row_product['Qte'] ?></td>
-                                                <td class="text-center"><?php echo $row_product['Prix'] ?></td>
+                                                <td class="text-center"><?php echo $row_product['Prix'] ?> Dhs</td>
                                                 <td class="w-40">
                                                     <?php 
                                                         if ($row_product['Qte'] <= 0) {
