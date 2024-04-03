@@ -148,14 +148,20 @@ if(isset($_GET['supprimer_product'])){
                     </div> -->
                     <!-- END: Search -->
                     <!-- BEGIN: Notifications -->
+                    <?php 
+                    $req_pro_out="SELECT id,libelle,qte FROM product WHERE qte <10 ORDER BY qte";
+                    $res_pro_out=mysqli_query($cnx, $req_pro_out); 
+                    $row_count = mysqli_num_rows($res_pro_out);
+
+                    $is_notification_bullet = ($row_count > 0) ? 'notification--bullet' : '';
+                    ?>
                     <div class="intro-x dropdown mr-auto sm:mr-6">
-                        <div class="dropdown-toggle notification notification--bullet cursor-pointer" role="button" aria-expanded="false" data-tw-toggle="dropdown"> <i data-lucide="bell" class="notification__icon dark:text-slate-500"></i> </div>
+                        <div class="dropdown-toggle notification <?php echo $is_notification_bullet; ?>  cursor-pointer" role="button" aria-expanded="false" data-tw-toggle="dropdown"> <i data-lucide="bell" class="notification__icon dark:text-slate-500"></i> </div>
                         <div class="notification-content pt-2 dropdown-menu">
                             <div class="notification-content__box dropdown-content">
                                 <div class="notification-content__title">Notifications</div>
                                 <?php 
-                                    $req_pro_out="SELECT id,libelle,qte FROM product WHERE qte <10 order by qte ";
-                                    $res_pro_out=mysqli_query($cnx, $req_pro_out);  
+                                    
                                     while($row_pro_out=mysqli_fetch_array($res_pro_out))
                                     {
                                 ?>

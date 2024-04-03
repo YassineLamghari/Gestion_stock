@@ -207,6 +207,40 @@ include("../securite/cnx.php");
                             </div>
                         </div>
                     </div> -->
+                    <?php 
+                    $req_pro_out="SELECT id,libelle,qte FROM product WHERE qte <10 ORDER BY qte";
+                    $res_pro_out=mysqli_query($cnx, $req_pro_out); 
+                    $row_count = mysqli_num_rows($res_pro_out);
+
+                    $is_notification_bullet = ($row_count > 0) ? 'notification--bullet' : '';
+                    ?>
+                    <div class="intro-x dropdown mr-auto sm:mr-6">
+                        <div class="dropdown-toggle notification <?php echo $is_notification_bullet; ?> cursor-pointer" role="button" aria-expanded="false" data-tw-toggle="dropdown"> <i data-lucide="bell" class="notification__icon dark:text-slate-500"></i> </div>
+                        <div class="notification-content pt-2 dropdown-menu">
+                            <div class="notification-content__box dropdown-content">
+                                <div class="notification-content__title">Notifications</div>
+                                <?php 
+                                    
+                                    while($row_pro_out=mysqli_fetch_array($res_pro_out))
+                                    {
+                                ?>
+                                <div class="cursor-pointer relative flex items-center mt-5">
+                                    <div class="w-12 h-12 flex-none image-fit mr-1">
+                                        <img alt="Midone - HTML Admin Template" class="rounded-full" src="../dist/images/profile-13.jpg">
+                                        <div class="w-3 h-3 bg-success absolute right-0 bottom-0 rounded-full border-2 border-white dark:border-darkmode-600"></div>
+                                    </div>
+                                    <div class="ml-2 overflow-hidden">
+                                        <div class="flex items-center" style="width:250px;">
+                                            <a href="./modifier_product.php?=<?php $row_pro_out['id'] ?>" class="font-medium truncate mr-5"><?php echo $row_pro_out['libelle'] ?></a> 
+                                            <div class="text-xs text-slate-400 ml-auto whitespace-nowrap"><?php echo $row_pro_out['qte'] ?></div>
+                                        </div>
+                                        <div class="w-full truncate text-slate-500 mt-0.5"><?php if($row_pro_out['qte']==0){echo "We need to add this product";}else{echo 'This product will by finish';} ?></div>
+                                    </div>
+                                </div>
+                                <?php } ?>
+                            </div>
+                        </div>
+                    </div>
                     <!-- END: Notifications -->
                     <!-- BEGIN: Account Menu -->
                     <?php
