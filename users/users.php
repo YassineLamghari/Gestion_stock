@@ -32,8 +32,8 @@ include("../securite/cnx.php");
         <div class="mobile-menu md:hidden">
             <?php 
                 $page_menu="users";
-                include("../menu_mobile.php");
-            ?>
+                include("../menu_mobile.php"); 
+                ?>
         </div>
         <!-- END: Mobile Menu -->
         <div class="flex mt-[4.7rem] md:mt-0">

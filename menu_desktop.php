@@ -30,7 +30,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="../product/add_product.php" class="side-menu<?php if($page_menu == 'add_product' || $page_menu == 'modifier_product' ) {?> side-menu--active <?php } ?>">
+                                <a href="<?php if($page_menu == 'modifier_product') { '../product/modifier_product.php';}else{'../product/add_product.php';} ?>" class="side-menu<?php if($page_menu == 'add_product' || $page_menu == 'modifier_product' ) {?> side-menu--active <?php } ?>">
                                     <div class="side-menu__icon"> <i data-lucide="plus-circle"></i> </div>
                                     <div class="side-menu__title"><?php if($page_menu == 'modifier_product') {echo "Modifier Product";}else{ echo "Add Product";} ?></div>
                                 </a>
@@ -48,18 +48,24 @@
                         </li>
                     <?php } ?>
                     <li>
-                        <a href="javascript:;" class="side-menu <?php if($page_menu == 'mon_profile' || $page_menu == 'change_password') {?> side-menu--active <?php } ?>">
+                        <a href="javascript:;" class="side-menu <?php if($page_menu == 'mon_profile' || $page_menu == 'change_password' || $page_menu == 'update_profile') {?> side-menu--active <?php } ?>">
                             <div class="side-menu__icon"> <i data-lucide="trello"></i> </div>
                             <div class="side-menu__title">
                                 Profile 
                                 <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
                             </div>
                         </a>
-                        <ul class="<?php if($page_menu == 'mon_profile' || $page_menu == 'change_password') {?> side-menu--open side-menu__sub-open <?php } ?>">
+                        <ul class="<?php if($page_menu == 'mon_profile' || $page_menu == 'change_password' || $page_menu == 'update_profile') {?> side-menu--open side-menu__sub-open <?php } ?>">
                             <li>
                                 <a href="../profile/mon_profile.php" class="side-menu <?php if($page_menu == 'mon_profile') {?> side-menu--active <?php } ?>">
                                     <div class="side-menu__icon"> <i data-lucide="settings"></i> </div>
                                     <div class="side-menu__title"> Mon Profile </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../profile/update_profile.php" class="side-menu<?php if($page_menu == 'update_profile') {?> side-menu--active <?php } ?>">
+                                    <div class="side-menu__icon"> <i data-lucide="key"></i> </div>
+                                    <div class="side-menu__title"> Update Profile </div>
                                 </a>
                             </li>
                             <li>

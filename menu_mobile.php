@@ -43,15 +43,21 @@
                         </li>
                     <?php } ?>
                     <li>
-                        <a href="javascript:;" class="menu <?php if($page_menu =='mon_profile' || $page_menu== 'change_password') { ?> menu--active <?php } ?>">
+                        <a href="javascript:;" class="menu <?php if($page_menu =='mon_profile' || $page_menu== 'change_password' || $page_menu == 'update_profile') { ?> menu--active <?php } ?>">
                             <div class="menu__icon"> <i data-lucide="trello"></i> </div>
                             <div class="menu__title"> Profile <i data-lucide="chevron-down" class="menu__sub-icon "></i> </div>
                         </a>
-                        <ul class="<?php if($page_menu =='mon_profile' || $page_menu== 'change_password') { ?> menu__sub-open  <?php } ?>">
+                        <ul class="<?php if($page_menu =='mon_profile' || $page_menu== 'change_password' || $page_menu == 'update_profile') { ?> menu__sub-open  <?php } ?>">
                             <li>
                                 <a href="../profile/mon_profile.php" class="menu <?php if($page_menu =='mon_profile') { ?> menu--active <?php } ?>">
                                     <div class="menu__icon"> <i data-lucide="settings"></i> </div>
                                     <div class="menu__title"> Mon Profile </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../profile/update_profile.php" class="menu <?php if( $page_menu == 'update_profile') { ?> menu--active <?php } ?>">
+                                    <div class="menu__icon"> <i data-lucide="key"></i> </div>
+                                    <div class="menu__title"> Update Profile </div>
                                 </a>
                             </li>
                             <li>
