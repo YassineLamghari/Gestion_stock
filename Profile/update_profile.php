@@ -18,6 +18,10 @@ if(isset($_GET["suprrimer_compte"])){
         $new_name=$_POST['new_nom'];
         $new_email=$_POST['new_email'];
 
+        $_SESSION['nom_user']=$new_name;
+        $_SESSION['email_user']=$new_email;
+
+
         $req_new_info="UPDATE users SET nom='$new_name',email='$new_email' WHERE id='$id_modifier_compte'";
         mysqli_query($cnx,$req_new_info);
     }
@@ -321,7 +325,7 @@ if(isset($_GET["suprrimer_compte"])){
                                 </h2>
                             </div>
                             <?php
-                                $data_user=mysqli_fetch_array(mysqli_query($cnx,$data_user));
+                                $data_user=mysqli_fetch_array(mysqli_query($cnx,"SELECT * FROM users WHERE id='$id_modifier_compte'"));
                             ?>
                             <div class="p-5">
                                 <div class="flex flex-col-reverse xl:flex-row flex-col">
@@ -330,11 +334,11 @@ if(isset($_GET["suprrimer_compte"])){
                                             <div class="col-span-12 2xl:col-span-6">
                                                 <div>
                                                     <label for="update-profile-form-1" class="form-label">Name</label>
-                                                    <input id="update-profile-form-1" type="text" class="form-control"  value="<?php echo $data_use['nom'] ?>" name="new_nom">
+                                                    <input id="update-profile-form-1" type="text" class="form-control"  value="<?php echo $data_user['nom'] ?>" name="new_nom">
                                                 </div>
                                                 <div class="mt-3">
                                                     <label for="update-profile-form-2" class="form-label">Email</label>
-                                                    <input id="update-profile-form-1" type="email" class="form-control"  value="<?php echo $data_use['email'] ?>" name="new_email">
+                                                    <input id="update-profile-form-1" type="email" class="form-control"  value="<?php echo $data_user['email'] ?>" name="new_email">
                                                 </div>
                                             </div>
                                             <div class="col-span-12 2xl:col-span-6">
