@@ -37,7 +37,7 @@
                             </li>
                         </ul>
                     <li class="side-nav__devider my-6"></li>
-                    <?php if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){ ?>
+                    <?php if(isset($_SESSION['role']) && $_SESSION['role'] == 'admin'){  ?>
                         <li>
                             <a href="../users/users.php" class="side-menu<?php if($page_menu == 'users') {?> side-menu--active <?php } ?>">
                                 <div class="side-menu__icon"> <i data-lucide="users"></i> </div>
