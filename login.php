@@ -4,7 +4,7 @@ include("./securite/cnx.php");
 if(isset($_SESSION["id_user"]) && $_SESSION["id_user"] != null){
     header("location: ./dashboard/index.php");
 }
-
+$mes="";
 if(isset($_POST["login"])){
     $email=$_POST["email_log"];
     $password=$_POST["password_log"];
@@ -21,16 +21,12 @@ if(isset($_POST["login"])){
 
         header("location: ./dashboard/index.php");
     }else{
-        header("location: ./login.php");
+        $mes="Email Or Password Is Incorrect !";
+        
+        
     }
 }
 
-?>
-<?php 
-// $nomcokie="test";
-// $valur=450;
-// $experation=time()+3600;
-// setcookie($nomcokie,$valeur,$experation);
 ?>
 
 <!DOCTYPE html>
@@ -74,8 +70,9 @@ if(isset($_POST["login"])){
                     <form method="post" class="my-auto mx-auto xl:ml-20 bg-white dark:bg-darkmode-600 xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-2/4 xl:w-auto">
                         <h2 class="intro-x font-bold text-2xl xl:text-3xl text-center ">
                             Sign In
-                        </h2>
+                        </h2> 
                         <div class="intro-x mt-8">
+                            <h3 style="color:red;" class="text-center"><?php echo $mes; ?> <h3>
                             <input type="email" class="intro-x login__input form-control py-3 px-4 block" placeholder="Email" name="email_log">
                             <input type="password" class="intro-x login__input form-control py-3 px-4 block mt-4" placeholder="Password" name="password_log">
                         </div>
