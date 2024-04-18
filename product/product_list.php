@@ -54,7 +54,7 @@ if(isset($_GET['supprimer_product'])){
                     <!-- BEGIN: Breadcrumb -->
                     <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="side-menu-light-product-list.html">Product</a></li>
+                            <li class="breadcrumb-item"><a href="./product_list.php">Product</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Product List</li>
                         </ol>
                     </nav>
@@ -274,7 +274,7 @@ if(isset($_GET['supprimer_product'])){
                                         <td class="table-report__action w-56">
                                             <div class="flex justify-center items-center">
                                                 <a class="flex items-center mr-3" href="./modifier_product.php?modifier_product=<?php echo $row_product['id'] ?>"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                                                <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal_<?php echo $data_product['id'] ?>"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete <?php echo $data_product['id'] ?> </a>
+                                                <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal_<?php echo $data_product['id'] ?>"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete  </a>
                                             </div> </td>
 
                                         <!-- BEGIN: Delete Confirmation Modal -->
@@ -291,7 +291,7 @@ if(isset($_GET['supprimer_product'])){
                                                         </div>
                                                         <div class="px-5 pb-8 text-center">
                                                             <button type="button" data-tw-dismiss="modal" class="btn btn-outline-secondary w-24 mr-1">Cancel</button>
-                                                            <a href="./product_list.php?supprimer_product=<?php echo $data_product['id'] ?>" class="btn btn-danger w-24">Delete <?php echo $data_product['id'] ?></a>
+                                                            <a href="./product_list.php?supprimer_product=<?php echo $data_product['id'] ?>" class="btn btn-danger w-24">Delete</a>
                                                         </div>
                                                     </div>
                                                 </div>

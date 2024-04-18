@@ -90,6 +90,7 @@ include("../securite/cnx.php");
                                     <?php }?>
                                 </div>
                                 <?php if(isset($_SESSION["role"]) && $_SESSION["role"] == "admin") { ?>
+                                    <?php /* if(isset($_COOKIE['test'])) { echo "la veleur est:".$valeur ;} */?>
                                 <div class="search-result__content__title">Users</div>
                                     <div class="mb-5">
                                         <?php
@@ -321,7 +322,7 @@ include("../securite/cnx.php");
                             </div>
                             <!-- END: General Report -->
                             <!-- BEGIN: Sales Report -->
-                            <div class="col-span-12 lg:col-span-6 mt-8">
+                            <!-- <div class="col-span-12 lg:col-span-6 mt-8">
                                 <div class="intro-y block sm:flex items-center h-10">
                                     <h2 class="text-lg font-medium truncate mr-5">
                                         Sales Report
@@ -363,10 +364,10 @@ include("../securite/cnx.php");
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- END: Sales Report -->
                             <!-- BEGIN: Weekly Top Seller -->
-                            <div class="col-span-12 sm:col-span-6 lg:col-span-3 mt-8">
+                            <!-- <div class="col-span-12 sm:col-span-6 lg:col-span-3 mt-8">
                                 <div class="intro-y flex items-center h-10">
                                     <h2 class="text-lg font-medium truncate mr-5">
                                         Weekly Top Seller
@@ -394,10 +395,10 @@ include("../securite/cnx.php");
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- END: Weekly Top Seller -->
                             <!-- BEGIN: Sales Report -->
-                            <div class="col-span-12 sm:col-span-6 lg:col-span-3 mt-8">
+                            <!-- <div class="col-span-12 sm:col-span-6 lg:col-span-3 mt-8">
                                 <div class="intro-y flex items-center h-10">
                                     <h2 class="text-lg font-medium truncate mr-5">
                                         Sales Report
@@ -425,10 +426,10 @@ include("../securite/cnx.php");
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- END: Sales Report -->
                             <!-- BEGIN: Official Store -->
-                            <div class="col-span-12 xl:col-span-8 mt-6">
+                            <!-- <div class="col-span-12 xl:col-span-8 mt-6">
                                 <div class="intro-y block sm:flex items-center h-10">
                                     <h2 class="text-lg font-medium truncate mr-5">
                                         Official Store
@@ -442,10 +443,10 @@ include("../securite/cnx.php");
                                     <div>250 Official stores in 21 countries, click the marker to see location details.</div>
                                     <div class="report-maps mt-5 bg-slate-200 rounded-md" data-center="-6.2425342, 106.8626478" data-sources="/../dist/json/location.json"></div>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- END: Official Store -->
                             <!-- BEGIN: Weekly Best Sellers -->
-                            <div class="col-span-12 xl:col-span-4 mt-6">
+                            <!-- <div class="col-span-12 xl:col-span-4 mt-6">
                                 <div class="intro-y flex items-center h-10">
                                     <h2 class="text-lg font-medium truncate mr-5">
                                         Weekly Best Sellers
@@ -502,10 +503,10 @@ include("../securite/cnx.php");
                                     </div>
                                     <a href="" class="intro-y w-full block text-center rounded-md py-4 border border-dotted border-slate-400 dark:border-darkmode-300 text-slate-500">View More</a> 
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- END: Weekly Best Sellers -->
                             <!-- BEGIN: General Report -->
-                            <div class="col-span-12 grid grid-cols-12 gap-6 mt-8">
+                            <!-- <div class="col-span-12 grid grid-cols-12 gap-6 mt-8"> 
                                 <div class="col-span-12 sm:col-span-6 2xl:col-span-3 intro-y">
                                     <div class="box p-5 zoom-in">
                                         <div class="flex items-center">
@@ -564,7 +565,7 @@ include("../securite/cnx.php");
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- END: General Report -->
                             <!-- BEGIN: Weekly Top Products -->
                             <div class="col-span-12 mt-6">
@@ -572,10 +573,10 @@ include("../securite/cnx.php");
                                     <h2 class="text-lg font-medium truncate mr-5">
                                         Weekly Top Products
                                     </h2>
-                                    <div class="flex items-center sm:ml-auto mt-3 sm:mt-0">
+                                    <!-- <div class="flex items-center sm:ml-auto mt-3 sm:mt-0">
                                         <button class="btn box flex items-center text-slate-600 dark:text-slate-300"> <i data-lucide="file-text" class="hidden sm:block w-4 h-4 mr-2"></i> Export to Excel </button>
                                         <button class="ml-3 btn box flex items-center text-slate-600 dark:text-slate-300"> <i data-lucide="file-text" class="hidden sm:block w-4 h-4 mr-2"></i> Export to PDF </button>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="intro-y overflow-auto lg:overflow-visible mt-8 sm:mt-0">
                                     <table class="table table-report sm:mt-2">
@@ -594,7 +595,6 @@ include("../securite/cnx.php");
                                             <?php 
                                                 $req_product="SELECT * FROM product";
                                                 $res_product=mysqli_query($cnx,$req_product);
-                                                $data_product=mysqli_fetch_array($res_product);  
                                                 
                                                 while($row_product=mysqli_fetch_array($res_product)){ 
                                             ?>
@@ -671,7 +671,7 @@ include("../securite/cnx.php");
                         <div class="2xl:border-l -mb-10 pb-10">
                             <div class="2xl:pl-6 grid grid-cols-12 gap-x-6 2xl:gap-x-0 gap-y-6">
                                 <!-- BEGIN: Transactions -->
-                                <div class="col-span-12 md:col-span-6 xl:col-span-4 2xl:col-span-12 mt-3 2xl:mt-8">
+                                <!-- <div class="col-span-12 md:col-span-6 xl:col-span-4 2xl:col-span-12 mt-3 2xl:mt-8">
                                     <div class="intro-x flex items-center h-10">
                                         <h2 class="text-lg font-medium truncate mr-5">
                                             Transactions
@@ -740,10 +740,10 @@ include("../securite/cnx.php");
                                         </div>
                                         <a href="" class="intro-x w-full block text-center rounded-md py-3 border border-dotted border-slate-400 dark:border-darkmode-300 text-slate-500">View More</a> 
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- END: Transactions -->
                                 <!-- BEGIN: Recent Activities -->
-                                <div class="col-span-12 md:col-span-6 xl:col-span-4 2xl:col-span-12 mt-3">
+                                <!-- <div class="col-span-12 md:col-span-6 xl:col-span-4 2xl:col-span-12 mt-3">
                                     <div class="intro-x flex items-center h-10">
                                         <h2 class="text-lg font-medium truncate mr-5">
                                             Recent Activities
@@ -822,10 +822,10 @@ include("../securite/cnx.php");
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- END: Recent Activities -->
                                 <!-- BEGIN: Important Notes -->
-                                <div class="col-span-12 md:col-span-6 xl:col-span-12 xl:col-start-1 xl:row-start-1 2xl:col-start-auto 2xl:row-start-auto mt-3">
+                                <!-- <div class="col-span-12 md:col-span-6 xl:col-span-12 xl:col-start-1 xl:row-start-1 2xl:col-start-auto 2xl:row-start-auto mt-3">
                                     <div class="intro-x flex items-center h-10">
                                         <h2 class="text-lg font-medium truncate mr-auto">
                                             Important Notes
@@ -866,10 +866,10 @@ include("../securite/cnx.php");
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- END: Important Notes -->
                                 <!-- BEGIN: Schedules -->
-                                <div class="col-span-12 md:col-span-6 xl:col-span-4 2xl:col-span-12 xl:col-start-1 xl:row-start-2 2xl:col-start-auto 2xl:row-start-auto mt-3">
+                                <!-- <div class="col-span-12 md:col-span-6 xl:col-span-4 2xl:col-span-12 xl:col-start-1 xl:row-start-2 2xl:col-start-auto 2xl:row-start-auto mt-3">
                                     <div class="intro-x flex items-center h-10">
                                         <h2 class="text-lg font-medium truncate mr-5">
                                             Schedules
@@ -952,7 +952,7 @@ include("../securite/cnx.php");
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- END: Schedules -->
                             </div>
                         </div>

@@ -26,12 +26,19 @@ if(isset($_POST["login"])){
 }
 
 ?>
+<?php 
+// $nomcokie="test";
+// $valur=450;
+// $experation=time()+3600;
+// setcookie($nomcokie,$valeur,$experation);
+?>
+
 <!DOCTYPE html>
 <html lang="en" class="light">
     <!-- BEGIN: Head -->
     <head>
         <meta charset="utf-8">
-        <link href="dist/images/logo.svg" rel="shortcut icon">
+        <link href="./dist/images/logo.svg" rel="shortcut icon">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Midone admin is super flexible, powerful, clean & modern responsive tailwind admin template with unlimited possibilities.">
         <meta name="keywords" content="admin template, Midone Admin Template, dashboard template, flat admin template, responsive admin template, web app">
@@ -48,11 +55,11 @@ if(isset($_POST["login"])){
                 <!-- BEGIN: Login Info -->
                 <div class="hidden xl:flex flex-col min-h-screen">
                     <a href="" class="-intro-x flex items-center pt-5">
-                        <img alt="Midone - HTML Admin Template" class="w-6" src="dist/images/logo.svg">
+                        <img alt="Midone - HTML Admin Template" class="w-6" src="./dist/images/logo.svg">
                         <span class="text-white text-lg ml-3"> Rubick </span> 
                     </a>
                     <div class="my-auto">
-                        <img alt="Midone - HTML Admin Template" class="-intro-x w-1/2 -mt-16" src="dist/images/illustration.svg">
+                        <img alt="Midone - HTML Admin Template" class="-intro-x w-1/2 -mt-16" src="./dist/images/illustration.svg">
                         <div class="-intro-x text-white font-medium text-4xl leading-tight mt-10">
                             A few more clicks to 
                             <br>
@@ -74,7 +81,7 @@ if(isset($_POST["login"])){
                         </div>
                         <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
                             <button type="submit" class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top" name="login">Login</button>
-                            <a href="./register.php"><button class="btn btn-outline-secondary py-3 px-4 w-full xl:w-32 mt-3 xl:mt-0 align-top">Register</button></a>
+                            <a href="./register.php" class="btn btn-outline-secondary py-3 px-4 w-full xl:w-32 mt-3 xl:mt-0 align-top">Register</a>
                         </div>
                     </form>
                 </div>

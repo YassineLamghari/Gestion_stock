@@ -62,7 +62,7 @@ if($_SERVER['REQUEST_METHOD']=="POST" and isset($_POST['add_product'])){
                     <!-- BEGIN: Breadcrumb -->
                     <nav aria-label="breadcrumb" class="-intro-x mr-auto hidden sm:flex">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Product</a></li>
+                            <li class="breadcrumb-item"><a href="./product_list.php">Product</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Modifier Product</li>
                         </ol>
                     </nav>

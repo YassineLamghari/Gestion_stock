@@ -237,7 +237,7 @@ include('../securite/cnx.php');
                                 </div>
                                 <div class="ml-4 mr-auto">
                                     <div class="font-medium text-base"><?php echo $_SESSION['nom_user'] ?></div>
-                                    <div class="text-slate-500">Backend Engineer</div>
+                                    <div class="text-slate-500"><?php echo $_SESSION['role'] ?></div>
                                 </div>
                                 <div class="dropdown">
                                     <a class="dropdown-toggle w-5 h-5 block" href="javascript:;" aria-expanded="false" data-tw-toggle="dropdown"> <i data-lucide="more-horizontal" class="w-5 h-5 text-slate-500"></i> </a>
