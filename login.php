@@ -9,7 +9,7 @@ if(isset($_POST["login"])){
     $email=$_POST["email_log"];
     $password=$_POST["password_log"];
 
-    $req_log="SELECT * FROM users WHERE email ='$email' and password= '$password'";
+    $req_log="SELECT * FROM users WHERE email ='$email' AND password= '$password' LIMIT 1";
     $res_log=mysqli_query($cnx,$req_log);
     $data_log=mysqli_fetch_array($res_log);
 
@@ -22,11 +22,8 @@ if(isset($_POST["login"])){
         header("location: ./dashboard/index.php");
     }else{
         $mes="Email Or Password Is Incorrect !";
-        
-        
     }
 }
-
 ?>
 
 <!DOCTYPE html>
