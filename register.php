@@ -1,5 +1,9 @@
 <?php
 
+SESSION_START();
+if(isset($_SESSION["id_user"]) && $_SESSION["id_user"] != null){
+    header("location: ./dashboard/index.php");
+}
 include("./securite/cnx.php");
 
 if(isset($_POST['register'])){
